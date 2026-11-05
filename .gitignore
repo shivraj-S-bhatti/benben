@@ -1,0 +1,23 @@
+# Runtime data: recordings, workspaces, venvs, secrets. Never commit.
+.artifacts/
+data/
+runs/
+*.sqlite3
+*.db
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+
+# Media from robot runs
+*.mp4
+*.mov
+*.npy
+*.jsonl
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+secrets/
