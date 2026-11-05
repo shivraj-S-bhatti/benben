@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BenBen today</title>
+<style>
+@font-face { font-family: "Inter"; src: url("../../app/static/fonts/Inter-Latin.woff2") format("woff2"); font-weight: 100 900; }
+@page { size: 1240px 1754px; margin: 0; }
+:root {
+  --ink: #141312; --ink2: #1e1c1a; --ink3: #2a2724;
+  --g1: #4a4642; --g2: #5f5a54; --g3: #77726b; --g4: #a39d94;
+  --paper: #e9e4db; --card: #f5f2ec; --card2: #efebe4; --shade: #ddd6ca;
+  --red: #c7372a; --red-t: #b3301f; --red-d: #8f2a20; --red-m: #e0786b; --khaki: #b3a37f;
+  --hair: rgba(20,19,18,.16);
+  --disp: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "SF Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1240px; height: 1754px; background: var(--paper); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: "Inter", sans-serif; color: var(--ink); font-size: 15px; line-height: 1.45; }
+.page { position: relative; width: 1240px; height: 1754px; overflow: hidden; padding: 48px 60px 0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .08 0 0 0 0 .07 0 0 0 0 .06 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(rgba(20,19,18,.045) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgba(20,19,18,.045) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--paper); }
+.mono { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.disp { font-family: var(--disp); font-weight: 700; letter-spacing: -.02em; }
+.card { background: var(--card); border: 1px solid var(--hair); border-radius: 2px; }
+
+/* status marks: ● ran (solid ink) · ◐ wired · ○ roadmap */
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid currentColor; flex: none; }
+.dot.ran { background: currentColor; }
+.dot.wired { background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 7px; border: 1px solid var(--ink); background: var(--card); color: var(--ink);
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.sw { display: inline-block; width: 10px; height: 10px; flex: none; }
+.a-report { background: var(--red); } .a-reroute { background: var(--ink); } .a-flag { background: var(--khaki); }
+.a-human { background: transparent; border: 1.5px solid var(--g3); }
+.a-dark { border: 1.5px solid var(--g3); background: repeating-linear-gradient(135deg, var(--g4) 0 2px, transparent 2px 5px); }
+
+/* masthead */
+.mast { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+.mast .wm { font-family: var(--disp); font-weight: 700; font-size: 24px; letter-spacing: -.02em; margin-right: 16px; }
+.mast .mono { color: var(--g1); }
+
+/* hero */
+.hero { position: relative; display: grid; grid-template-columns: 1fr 330px; padding-bottom: 26px; }
+.hero h1 { font-size: 66px; line-height: .98; margin-top: 34px; width: 780px; }
+.hero .dek { width: 620px; margin-top: 18px; font-size: 18px; line-height: 1.45; color: var(--g1); }
+.hero .dek b { color: var(--ink); font-weight: 600; }
+.hero .art { position: relative; }
+.hero .ht { position: absolute; left: 0; top: 14px; width: 330px; height: 230px; background: url("assets/op2-halftone.png") 0 0 / 100% 100% no-repeat; opacity: .8; }
+.hero img { position: absolute; right: 40px; top: 0; width: 206px;
+  filter: sepia(.35) saturate(.85) contrast(1.06) brightness(.95) drop-shadow(0 18px 18px rgba(42,39,36,.28)); }
+.hero .cap { position: absolute; right: 0; bottom: 0; color: var(--g2); font-size: 10px; }
+
+/* problem band */
+.problem { display: grid; grid-template-columns: 1.6fr 1fr 1fr; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.problem > div { padding: 18px 26px 18px 0; }
+.problem > div + div { border-left: 1px solid var(--hair); padding-left: 26px; }
+.problem q { display: block; font-family: var(--disp); font-weight: 500; font-size: 23px; line-height: 1.2; letter-spacing: -.01em; quotes: "\201C" "\201D"; }
+.problem .who { margin-top: 10px; color: var(--g2); }
+.problem .k { color: var(--g2); margin-bottom: 8px; }
+.problem .v { font-size: 18px; line-height: 1.3; font-weight: 500; }
+
+/* section heads */
+.sh { display: flex; align-items: center; gap: 12px; margin: 26px 0 12px; color: var(--g1); }
+.sh b { color: var(--ink); font-weight: 600; }
+.sh::after { content: ""; flex: 1; height: 1px; background: var(--hair); }
+
+/* built strip */
+.strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.step { position: relative; padding: 10px 10px 14px; }
+.step .ph { position: relative; height: 122px; overflow: hidden; background: var(--ink2); }
+.step .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.step .ph img.map { transform: scale(1.2); }
+.step .ph .chip { position: absolute; left: 8px; bottom: 8px; }
+.step .head { display: flex; align-items: baseline; gap: 10px; margin: 12px 4px 4px; }
+.step .head .mono { color: var(--g2); }
+.step h3 { font-size: 26px; line-height: 1; flex: 1; }
+.step .head .dot { align-self: center; }
+.step p { margin: 0 4px; font-size: 14px; color: var(--g1); line-height: 1.4; }
+.arrow { position: absolute; top: 62px; right: -16px; width: 11px; height: 11px; border-top: 2px solid var(--ink); border-right: 2px solid var(--ink); transform: rotate(45deg); z-index: 2; }
+
+/* numbers + architecture */
+.row2 { display: grid; grid-template-columns: minmax(0, 1fr) 348px; gap: 20px; }
+.numbers { padding: 20px 24px 20px; }
+.hd { display: flex; justify-content: space-between; color: var(--g1); }
+.big { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 12px; }
+.big .v { font-family: "DIN Condensed", var(--disp); font-weight: 700; font-size: 56px; line-height: .9; letter-spacing: -.01em; }
+.big .u { font-size: 13px; color: var(--g1); margin-top: 6px; line-height: 1.3; }
+.big .u .mono { font-size: 10px; color: var(--g2); display: block; margin-top: 2px; }
+.hr { height: 1px; background: var(--hair); margin: 14px 0 12px; }
+.bar { display: grid; grid-template-columns: repeat(14, 1fr); gap: 4px; height: 22px; margin-top: 10px; }
+.bar .sw { width: auto; height: auto; }
+.legend { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px 18px; margin-top: 10px; font-size: 13px; color: var(--g1); white-space: nowrap; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.trio { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 22px; }
+.trio .k { color: var(--g1); margin-bottom: 4px; }
+.trio .v { font-family: "DIN Condensed", var(--disp); font-weight: 700; font-size: 34px; line-height: 1; }
+.trio .v small { font-family: "Inter", sans-serif; font-weight: 400; font-size: 13px; color: var(--g1); margin-left: 4px; }
+.trio p { font-size: 13px; color: var(--g1); margin-top: 6px; line-height: 1.38; }
+.trio p.mono { font-size: 10px; color: var(--g2); line-height: 1.6; }
+
+.arch { padding: 20px 20px 18px; }
+.lane { margin-top: 14px; }
+.node { display: flex; align-items: center; gap: 10px; padding: 6px 10px; font-size: 14px; font-weight: 500; background: var(--card); border: 1px solid var(--ink3); }
+.node small { margin-left: auto; font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--g2); font-weight: 400; }
+.node.wired { border-color: var(--g3); }
+.node.road { border: 1px dashed var(--g3); background: transparent; color: var(--g1); }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.down { height: 10px; position: relative; }
+.down::after { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 10px; background: var(--ink); }
+.arch .note { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--hair); font-size: 13.5px; line-height: 1.4; color: var(--ink); font-weight: 500; }
+
+/* learned: ink panel */
+.learned { display: grid; grid-template-columns: 250px 250px 1fr; gap: 16px; padding: 16px; background: var(--ink2); color: var(--paper); border-radius: 2px; }
+.learned .ph { position: relative; height: 132px; overflow: hidden; background: #000; }
+.learned .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.learned .ph.lidar img { object-position: 100% 50%; transform: scale(1.5); transform-origin: 85% 55%; }
+.learned .ph .chip { position: absolute; left: 8px; bottom: 8px; }
+.learned .txt { padding: 4px 10px 4px 12px; display: flex; flex-direction: column; justify-content: center; }
+.learned .fact { color: var(--g4); }
+.learned .fact b { color: var(--paper); font-weight: 600; }
+.learned .thesis { font-size: 36px; line-height: 1.04; margin-top: 12px; color: var(--g4); }
+.learned .thesis em { font-style: normal; color: var(--card); }
+
+/* next 90 */
+.next { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--ink); }
+.next > div { padding: 16px 16px 18px 0; }
+.next > div + div { border-left: 1px solid var(--hair); padding-left: 16px; }
+.next .n { display: flex; align-items: center; gap: 8px; color: var(--g2); }
+.next h4 { font-family: var(--disp); font-weight: 700; font-size: 17px; letter-spacing: -.01em; line-height: 1.2; margin: 10px 0 6px; }
+.next p { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--g1); line-height: 1.55; }
+
+/* footer */
+.foot { position: absolute; left: 60px; right: 60px; bottom: 32px; display: flex; justify-content: space-between; align-items: center;
+  font-size: 12.5px; color: var(--g1); border-top: 1px solid var(--ink); padding-top: 12px; }
+.foot b { color: var(--ink); font-weight: 600; }
+.foot .st { display: flex; gap: 16px; align-items: center; }
+.foot .st span { display: inline-flex; align-items: center; gap: 6px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="mast">
+    <div><span class="wm">BenBen</span><span class="mono">Today · Nov 2026</span></div>
+    <span class="mono">Community accessibility · route inspection</span>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1 class="disp" data-w>A robot dog that checks if the route is passable.</h1>
+      <p class="dek" data-w>A Unitree Go2, <b>driven by a person with the remote</b>, records camera, LiDAR and pose.</p>
+    </div>
+    <div class="art">
+      <div class="ht"></div>
+      <img src="assets/go2-render.png" alt="Unitree Go2 robot dog">
+      <span class="cap mono">Unitree Go2 · official model render</span>
+    </div>
+  </section>
+
+  <section class="problem">
+    <div>
+      <q data-w>I got injured and ended up in a wheelchair … I had no idea if my route to the bus was even passable.</q>
+      <div class="who mono">Shivraj, who built BenBen</div>
+    </div>
+    <div><div class="k mono">Today, owners</div><div class="v" data-w>learn about barriers from whoever couldn’t pass.</div></div>
+    <div><div class="k mono">Today, routing apps</div><div class="v" data-w>run on map data that can be years old.</div></div>
+  </section>
+
+  <div class="sh mono"><b>01</b>What we built</div>
+  <section class="strip">
+    <div class="step card">
+      <div class="ph"><img class="map" src="assets/op2-map.png" alt="Top-down LiDAR map with the driven path"></div>
+      <div class="head"><span class="mono">01</span><h3 class="disp">Drive</h3><span class="dot ran"></span></div>
+      <p data-w>A person pilots it by remote.</p>
+      <span class="arrow"></span>
+    </div>
+    <div class="step card">
+      <div class="ph"><img src="assets/op-split.jpg" alt="Camera and LiDAR split view"></div>
+      <div class="head"><span class="mono">02</span><h3 class="disp">Sense</h3><span class="dot ran"></span></div>
+      <p data-w>A listen-only link records it all.</p>
+      <span class="arrow"></span>
+    </div>
+    <div class="step card">
+      <div class="ph"><img src="assets/op-frame-048-sam.jpg" alt="Paper bag outlined by SAM 3.1"><span class="chip"><i class="sw a-flag"></i>Flag for service</span></div>
+      <div class="head"><span class="mono">03</span><h3 class="disp">Judge</h3><span class="dot ran"></span></div>
+      <p data-w>Muse Spark picks one of four actions. SAM 3.1 boxes the obstacle.</p>
+      <span class="arrow"></span>
+    </div>
+    <div class="step card">
+      <div class="ph"><img src="assets/op-workbench.jpg" alt="BenBen workbench with action items and LiDAR map" style="object-position: 0 0"></div>
+      <div class="head"><span class="mono">04</span><h3 class="disp">Act</h3><span class="dot ran"></span></div>
+      <p data-w>Each finding keeps its photo and capture time.</p>
+    </div>
+  </section>
+
+  <div class="sh mono"><b>02</b>What ran on Nov 4</div>
+  <section class="row2">
+    <div class="numbers card">
+      <div class="hd mono"><span>Recorded</span><span>~4 min · after dark · human-piloted</span></div>
+      <div class="big">
+        <div><div class="v">3,396</div><div class="u">video frames</div></div>
+        <div><div class="v">2,355</div><div class="u">LiDAR clouds<span class="mono">5 cm voxels · ~10 Hz</span></div></div>
+        <div><div class="v">227</div><div class="u">timestamped stills<span class="mono">pose at ~19 Hz</span></div></div>
+        <div><div class="v">14</div><div class="u">stills judged<span class="mono">by Muse Spark</span></div></div>
+      </div>
+      <div class="hr"></div>
+      <div class="hd mono"><span>Muse Spark verdicts · muse-spark-1.3</span><span>14 stills</span></div>
+      <div class="bar">
+        <i class="sw a-reroute"></i>
+        <i class="sw a-flag"></i><i class="sw a-flag"></i>
+        <i class="sw a-report"></i>
+        <i class="sw a-human"></i><i class="sw a-human"></i>
+        <i class="sw a-dark"></i><i class="sw a-dark"></i><i class="sw a-dark"></i><i class="sw a-dark"></i><i class="sw a-dark"></i><i class="sw a-dark"></i><i class="sw a-dark"></i><i class="sw a-dark"></i>
+      </div>
+      <div class="legend">
+        <span><i class="sw a-reroute"></i><b>1</b> reroute · steps, no ramp</span>
+        <span><i class="sw a-flag"></i><b>2</b> flag · paper bag</span>
+        <span><i class="sw a-report"></i><b>1</b> report · entrance step</span>
+        <span><i class="sw a-human"></i><b>10</b> needs a human</span>
+        <span><i class="sw a-dark"></i><b>8</b> of them too dark</span>
+      </div>
+      <div class="hr"></div>
+      <div class="trio">
+        <div><div class="k mono">Muse Spark</div><div class="v">7–43 s<small>/ frame</small></div><p data-w>One action per still, with a reason.</p></div>
+        <div><div class="k mono">SAM 3.1 · live</div><div class="v">0.8–2.4 s<small>/ frame</small></div><p data-w>Boxed the stairs, bag, chair and entrance step.</p></div>
+        <div><div class="k mono">Indoor twin · M1 Pro</div><div class="v">4.2M<small>points in</small> 122 s</div><p class="mono">MapAnything · 32 frames<br>Brush splat · 17 dB PSNR, held-out views</p></div>
+      </div>
+    </div>
+
+    <div class="arch card">
+      <div class="hd mono"><span>How it fits</span></div>
+      <div class="lane">
+        <div class="node"><span class="dot ran"></span>Unitree Go2<small>remote-piloted</small></div>
+        <div class="down"></div>
+        <div class="node"><span class="dot ran"></span>Listen-only recorder<small>WebRTC · Mac</small></div>
+        <div class="down"></div>
+        <div class="node"><span class="dot ran"></span>Run folder<small>video · LiDAR · pose</small></div>
+        <div class="down"></div>
+        <div class="pair">
+          <div class="node"><span class="dot ran"></span>Muse Spark</div>
+          <div class="node"><span class="dot ran"></span>SAM 3.1</div>
+        </div>
+        <div class="down"></div>
+        <div class="node"><span class="dot ran"></span>Workbench<small>ran locally</small></div>
+        <div class="down"></div>
+        <div class="pair">
+          <div class="node wired"><span class="dot wired"></span>Ask-Muse</div>
+          <div class="node wired"><span class="dot wired"></span>Voice</div>
+        </div>
+        <div class="down"></div>
+        <div class="pair">
+          <div class="node road"><span class="dot"></span>Place memory</div>
+          <div class="node road"><span class="dot"></span>Route patrol</div>
+        </div>
+        <p class="note" data-w>No motion commands sent. A person drove BenBen for the whole run.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="sh mono"><b>03</b>What we learned</div>
+  <section class="learned">
+    <div class="ph"><img src="assets/op-frame-022.jpg" alt="Dark camera frame of a railing"><span class="chip"><i class="sw a-human"></i>Camera: too dark</span></div>
+    <div class="ph lidar"><img src="assets/op-split.jpg" alt="LiDAR scan of the same run"><span class="chip"><i class="dot ran"></i>LiDAR: mapped</span></div>
+    <div class="txt">
+      <div class="fact" data-w><b>8 of 14</b> verdicts: too dark. The LiDAR mapped the same stretches.</div>
+      <div class="thesis disp" data-w><em>Geometry</em> decides when to look. <em>Vision</em> decides what it is.</div>
+    </div>
+  </section>
+
+  <div class="sh mono"><b>04</b>Next 90 days</div>
+  <section class="next">
+    <div><div class="n mono"><span class="dot"></span>01</div><h4>Tier-0 gate</h4><p>Blur · darkness · LiDAR height-map diff, before Muse</p></div>
+    <div><div class="n mono"><span class="dot"></span>02</div><h4>Checkpoint memory</h4><p>Keyed by route checkpoint, not object identity</p></div>
+    <div><div class="n mono"><span class="dot"></span>03</div><h4>Append-only log</h4><p>State = latest usable observation</p></div>
+    <div><div class="n mono"><span class="dot"></span>04</div><h4>One targeted question</h4><p>“Needs a human” → one question + SAM box</p></div>
+    <div><div class="n mono"><span class="dot"></span>05</div><h4>Clear, blocked, cleared</h4><p>Staged daylight pair: revisit + verify</p></div>
+  </section>
+
+  <footer class="foot">
+    <div><b>Meta stack</b> Muse Spark · SAM 3.1 · MapAnything · Voice Transcribe &nbsp;·&nbsp; <span class="mono" style="text-transform:none;letter-spacing:0">github.com/shivraj-S-bhatti/benben</span></div>
+    <div class="st">
+      <span><i class="dot ran"></i>ran Nov 4</span>
+      <span><i class="dot wired"></i>wired, tested offline</span>
+      <span><i class="dot"></i>roadmap</span>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

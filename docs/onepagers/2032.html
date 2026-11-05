@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BenBen 2032</title>
+<style>
+@font-face { font-family: "Inter"; src: url("../../app/static/fonts/Inter-Latin.woff2") format("woff2"); font-weight: 100 900; }
+@page { size: 1240px 1754px; margin: 0; }
+:root {
+  --ink: #141312; --ink2: #1e1c1a; --ink3: #2a2724;
+  --g1: #4a4642; --g2: #5f5a54; --g3: #77726b; --g4: #a39d94;
+  --paper: #e9e4db; --card: #f5f2ec; --card2: #efebe4; --shade: #ddd6ca;
+  --red: #c7372a; --red-t: #b3301f; --red-m: #e0786b; --khaki: #b3a37f;
+  --hair: rgba(20,19,18,.16);
+  --disp: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "SF Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1240px; height: 1754px; background: var(--paper); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: "Inter", sans-serif; color: var(--ink); font-size: 15px; line-height: 1.45; }
+.page { position: relative; width: 1240px; height: 1754px; overflow: hidden; padding: 48px 60px 0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .08 0 0 0 0 .07 0 0 0 0 .06 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(rgba(20,19,18,.045) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgba(20,19,18,.045) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--paper); }
+.mono { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.disp { font-family: var(--disp); font-weight: 700; letter-spacing: -.02em; }
+.card { background: var(--card); border: 1px solid var(--hair); border-radius: 2px; }
+.dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid currentColor; flex: none; }
+.dot.ran { background: currentColor; }
+.dot.wired { background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 7px; border: 1px solid var(--ink); background: var(--card); color: var(--ink);
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.sw { display: inline-block; width: 10px; height: 10px; flex: none; }
+.a-flag { background: var(--khaki); } .a-human { border: 1.5px solid var(--g3); }
+.hd { display: flex; justify-content: space-between; color: var(--g1); }
+
+/* masthead */
+.mast { display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+.mast .wm { font-family: var(--disp); font-weight: 700; font-size: 24px; letter-spacing: -.02em; margin-right: 16px; }
+.mast .mono { color: var(--g1); }
+.vision { background: var(--ink); color: var(--card); padding: 7px 12px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+
+.thesis { font-size: 54px; line-height: 1.02; margin-top: 32px; width: 1100px; }
+.thesis span { color: var(--g2); }
+
+.sh { display: flex; align-items: center; gap: 12px; margin: 30px 0 12px; color: var(--g1); }
+.sh b { color: var(--ink); font-weight: 600; }
+.sh::after { content: ""; flex: 1; height: 1px; background: var(--hair); }
+
+/* row A */
+.rowA { display: grid; grid-template-columns: 450px minmax(0, 1fr); gap: 20px; }
+.cascade { padding: 20px 22px 18px; }
+.tier { padding: 12px 0 12px 16px; border-left: 3px solid; }
+.tier + .tier { margin-top: 12px; }
+.tier .top { display: flex; align-items: center; gap: 10px; color: var(--g1); }
+.tier .cost { margin-left: auto; border: 1px solid var(--ink); color: var(--ink); padding: 1px 6px; font-size: 10px; }
+.tier h4 { font-family: var(--disp); font-weight: 700; letter-spacing: -.015em; font-size: 21px; line-height: 1.15; margin: 6px 0 6px; }
+.tier .det { color: var(--g1); font-size: 10.5px; line-height: 1.6; }
+.tier .tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tier .tags span { border: 1px solid var(--hair); background: var(--card2); padding: 2px 6px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .02em; color: var(--ink3); }
+.t0 { border-color: var(--g4); } .t1 { border-color: var(--g1); margin-left: 18px; } .t2 { border-color: var(--ink); margin-left: 36px; }
+.funnel { margin-top: 18px; display: grid; gap: 5px; }
+.funnel div { display: flex; align-items: center; gap: 10px; }
+.funnel i { height: 8px; display: block; flex: none; }
+.funnel .mono { font-size: 10px; color: var(--g1); }
+
+.twin { padding: 18px 18px 14px; display: flex; flex-direction: column; }
+.twin svg { display: block; width: 100%; flex: 1; min-height: 0; }
+.twin .cap { display: flex; justify-content: space-between; color: var(--g2); font-size: 10px; margin-top: 6px; }
+
+/* row B */
+.rowB { display: grid; grid-template-columns: minmax(0, 1fr) 430px; gap: 20px; }
+.memory { padding: 20px 22px 0; display: flex; flex-direction: column; }
+.tl { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 16px; }
+.tl::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 34px; height: 2px;
+  background: linear-gradient(90deg, var(--ink) 0 33.3%, var(--red) 33.3% 100%); }
+.v { text-align: center; }
+.v .when { color: var(--g1); font-size: 10px; }
+.v .pin { width: 18px; height: 18px; border-radius: 50%; margin: 7px auto 10px; position: relative; z-index: 1; background: var(--ink); border: 2px solid var(--ink); }
+.v .pin.blocked { background: var(--red); border-color: var(--red); }
+.v .pin.dark { background: var(--card); border: 2px dashed var(--g3); }
+.v .obs { font-family: var(--disp); font-weight: 700; font-size: 17px; letter-spacing: -.01em; }
+.v .st { font-size: 10px; color: var(--g2); margin-top: 3px; line-height: 1.5; }
+.v .st b { color: var(--red-t); font-weight: 600; }
+.rule { margin: auto -22px 0; padding: 14px 22px; background: var(--ink2); color: var(--g4); display: flex; align-items: baseline; gap: 16px; font-size: 13px; line-height: 1.4; }
+.rule b { color: var(--card); font-family: var(--disp); font-weight: 700; letter-spacing: -.015em; font-size: 21px; white-space: nowrap; }
+
+.ev { padding: 12px; }
+.ev .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ev .ph { position: relative; height: 168px; overflow: hidden; background: #000; }
+.ev .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ev .tagl { position: absolute; left: 8px; top: 8px; background: var(--ink); color: var(--card); padding: 2px 7px; }
+.ev .ph .chip { position: absolute; left: 8px; bottom: 8px; }
+.ev .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; color: var(--g1); font-size: 10px; }
+.ev .foot2 { font-size: 12.5px; color: var(--g1); margin-top: 8px; }
+
+/* row C */
+.rowC { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.col { padding: 20px 22px 22px; }
+.col .k { color: var(--g1); margin-bottom: 8px; }
+.col h3 { font-size: 24px; line-height: 1.08; margin-bottom: 14px; }
+ul.ticks { list-style: none; }
+ul.ticks li { display: flex; gap: 10px; align-items: baseline; font-size: 14px; line-height: 1.35; }
+ul.ticks li + li { margin-top: 8px; }
+ul.ticks li .dot { position: relative; top: 1px; }
+ul.ticks li small { display: block; color: var(--g1); font-size: 12.5px; }
+.gate { margin-top: 16px; padding: 10px 12px; border: 1px dashed var(--g3); font-size: 13px; color: var(--g1); line-height: 1.4; }
+.gate b { color: var(--ink); font-weight: 600; }
+.nomotor { margin-top: 12px; display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--ink); padding: 4px 9px; font-weight: 600; }
+.nomotor::before { content: ""; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--ink); background: linear-gradient(135deg, transparent 44%, var(--ink) 44% 56%, transparent 56%); }
+.srcs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.src { text-align: center; padding: 7px 4px; border: 1px solid var(--ink3); font-size: 13px; font-weight: 500; }
+.merge { height: 20px; position: relative; }
+.merge::before { content: ""; position: absolute; left: 16.6%; right: 16.6%; top: 0; height: 10px; border: 1px solid var(--ink); border-top: none; }
+.merge::after { content: ""; position: absolute; left: 50%; top: 10px; width: 1px; height: 10px; background: var(--ink); }
+.hub { text-align: center; padding: 10px; background: var(--ink2); color: var(--card); font-size: 14px; font-weight: 600; }
+.hub small { display: block; font-size: 12px; color: var(--g4); font-weight: 400; }
+.down { height: 14px; position: relative; } .down::after { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 14px; background: var(--ink); }
+.sink { text-align: center; padding: 8px; border: 1px solid var(--ink3); font-size: 14px; font-weight: 600; }
+.sink small { display: block; font-size: 12px; color: var(--g1); font-weight: 400; }
+
+/* measure */
+.measure { margin-top: 20px; padding: 16px 22px; background: var(--ink2); color: var(--card); display: flex; align-items: center; gap: 24px; border-radius: 2px; }
+.measure .k { white-space: nowrap; }
+.measure .note { color: var(--g4); margin-top: 3px; font-size: 13px; }
+.metrics { display: flex; gap: 8px; flex: 1; justify-content: flex-end; }
+.metric { white-space: nowrap; padding: 6px 11px; border: 1px solid rgba(233,228,219,.4); font-size: 14px; font-weight: 500; }
+
+.foot { position: absolute; left: 60px; right: 60px; bottom: 32px; display: flex; justify-content: space-between; align-items: center;
+  font-size: 12.5px; color: var(--g1); border-top: 1px solid var(--ink); padding-top: 12px; }
+.foot b { color: var(--ink); font-weight: 600; }
+.foot .st { display: flex; gap: 16px; align-items: center; }
+.foot .st span { display: inline-flex; align-items: center; gap: 6px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="mast">
+    <div><span class="wm">BenBen</span><span class="mono">2032</span></div>
+    <span class="vision">A vision, not a result</span>
+  </header>
+
+  <h1 class="thesis disp" data-w><span>Every robot, phone and camera feeds one memory of a place.</span> Nothing is called fixed until it’s seen fixed.</h1>
+
+  <div class="sh mono"><b>01</b>Perception cascade · place memory</div>
+  <section class="rowA">
+    <div class="cascade card">
+      <div class="tier t0">
+        <div class="top mono"><span>Tier 0</span><span class="cost">Free</span></div>
+        <h4 data-w>Is this view usable? Did the place change?</h4>
+        <div class="det mono">Image quality · pose · LiDAR geometry change · works in the dark</div>
+      </div>
+      <div class="tier t1">
+        <div class="top mono"><span>Tier 1</span><span class="cost">Local</span></div>
+        <h4 data-w>What changed?</h4>
+        <div class="det mono" style="margin-bottom:6px">Meta open weights, on the device</div>
+        <div class="tags"><span>Muse Spark Open* or similar*</span><span>SAM 2.1</span><span>V-JEPA 2 or Perception Encoder: keyframes*</span></div>
+      </div>
+      <div class="tier t2">
+        <div class="top mono"><span>Tier 2</span><span class="cost">API</span></div>
+        <h4 data-w>Is it a barrier? What’s the evidence?</h4>
+        <div class="det mono">Muse Spark + SAM 3.1 · judge and cite</div>
+      </div>
+      <div class="funnel">
+        <div><i style="width:100%;max-width:220px;background:var(--g4)"></i><span class="mono">Every frame</span></div>
+        <div><i style="width:110px;background:var(--g1)"></i><span class="mono">Frames that changed</span></div>
+        <div><i style="width:28px;background:var(--ink)"></i><span class="mono">The few worth a call</span></div>
+      </div>
+    </div>
+
+    <div class="twin card">
+      <div class="hd mono"><span>One route, every source</span></div>
+      <svg id="iso" viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="cap"><span class="mono">schematic · anchors placed by hand</span><span class="mono">Robot: Unitree Go2 model render</span></div>
+    </div>
+  </section>
+
+  <div class="sh mono"><b>02</b>One checkpoint across visits</div>
+  <section class="rowB">
+    <div class="memory card">
+      <div class="tl">
+        <div class="v"><div class="when mono">Visit 1 · robot</div><div class="pin"></div><div class="obs">Clear</div><div class="st mono">usable · clear</div></div>
+        <div class="v"><div class="when mono">Visit 2 · phone</div><div class="pin blocked"></div><div class="obs">Blocked</div><div class="st mono">usable · <b>blocked</b></div></div>
+        <div class="v"><div class="when mono">Visit 3 · robot</div><div class="pin dark"></div><div class="obs" style="color:var(--g2)">Too dark</div><div class="st mono">not usable ·<br><b>stays blocked</b></div></div>
+        <div class="v"><div class="when mono">Visit 4 · camera</div><div class="pin"></div><div class="obs">Cleared</div><div class="st mono">usable · cleared</div></div>
+      </div>
+      <div class="rule"><b data-w>Latest usable observation wins.</b><span data-w>Observations are append-only. A dark frame or an empty detection never clears an issue.</span></div>
+    </div>
+
+    <div class="ev card">
+      <div class="pair">
+        <div class="ph"><img src="assets/op-frame-022.jpg" alt="Dark camera frame"><span class="tagl mono">Before</span><span class="chip"><i class="sw a-human"></i>Too dark · not usable</span></div>
+        <div class="ph"><img src="assets/op-frame-048-sam.jpg" alt="Paper bag outlined by SAM 3.1"><span class="tagl mono">Now</span><span class="chip"><i class="sw a-flag"></i>Flag for service</span></div>
+      </div>
+      <div class="meta"><span class="mono">7:27 PM · too dark</span><span class="mono">Fresh view · SAM box</span></div>
+      <div class="foot2" data-w>Real Nov 4 frames, arranged to show the evidence card.</div>
+    </div>
+  </section>
+
+  <div class="sh mono"><b>03</b>How it scales</div>
+  <section class="rowC">
+    <div class="col card">
+      <div class="k mono">Autonomy, safely</div>
+      <h3 class="disp" data-w>Patrol a fixed route, not the open world.</h3>
+      <ul class="ticks">
+        <li><i class="dot"></i>Fixed-route checkpoint patrol</li>
+        <li><i class="dot"></i>Deterministic motion guard</li>
+        <li><i class="dot"></i>Human remote override, always</li>
+      </ul>
+      <div class="gate" data-w>A navigation policy is promoted <b>only if it beats replay and sim.</b></div>
+      <div class="nomotor">No text-to-motor</div>
+    </div>
+
+    <div class="col card">
+      <div class="k mono">Scale</div>
+      <h3 class="disp" data-w>Verified access states, fed to routing apps.</h3>
+      <div class="srcs"><div class="src">Estates</div><div class="src">Campuses</div><div class="src">Hospitals</div></div>
+      <div class="merge"></div>
+      <div class="hub">Verified access state<small>per checkpoint, with its evidence</small></div>
+      <div class="down"></div>
+      <div class="sink">Routing apps<small>Emerald Path-style step-free routing</small></div>
+    </div>
+
+    <div class="col card">
+      <div class="k mono">Guardrails</div>
+      <h3 class="disp" data-w>People see the evidence before anything happens.</h3>
+      <ul class="ticks">
+        <li><i class="dot"></i><div>Privacy<small data-w>Blur people before anything is stored or shared.</small></div></li>
+        <li><i class="dot"></i><div>Human review<small data-w>A person approves every external action.</small></div></li>
+        <li><i class="dot"></i><div>Evidence trail<small data-w>Every state links to the frames behind it.</small></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="measure">
+    <div><div class="k mono">What we’d measure</div><div class="note">Named, not yet measured.</div></div>
+    <div class="metrics">
+      <span class="metric">Missed changes</span>
+      <span class="metric">False clears</span>
+      <span class="metric">Citation validity</span>
+      <span class="metric">Time to verified fix</span>
+      <span class="metric">Duplicate actions</span>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div><b>Meta stack</b> Muse Spark · SAM 3.1 · MapAnything · Voice Transcribe &nbsp;·&nbsp; <span class="mono" style="text-transform:none;letter-spacing:0">github.com/shivraj-S-bhatti/benben</span></div>
+    <div class="st">
+      <span><i class="dot ran"></i>ran Nov 4</span>
+      <span><i class="dot wired"></i>wired, tested offline</span>
+      <span><i class="dot"></i>roadmap</span>
+    </div>
+  </footer>
+</div>
+<script>
+// Isometric schematic, ink line-art: two blocks, a walkway, trees, two checkpoints and two camera views.
+(function () {
+  const svg = document.getElementById("iso"), NS = "http://www.w3.org/2000/svg";
+  const K = 15.5, OX = 262, OY = 92;
+  const P = (x, y, z = 0) => [OX + (x - y) * K * 0.866, OY + (x + y) * K * 0.5 - z * K];
+  const pts = a => a.map(p => P(...p).map(v => v.toFixed(1)).join(",")).join(" ");
+  const el = (tag, attrs, parent = svg) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
+  const INK = "#2a2724", GREY = "#77726b", LIGHT = "#a39d94", RED = "#c7372a", REDT = "#b3301f", KHAKI = "#b3a37f", CARD = "#f5f2ec";
+
+  el("polygon", { points: pts([[0,0],[22,0],[22,16],[0,16]]), fill: "rgba(20,19,18,.025)", stroke: LIGHT, "stroke-width": 1 });
+  // LiDAR footprint underlay
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 520; i++) {
+    const onWalk = rnd() < .55;
+    const x = onWalk ? 8.4 + rnd() * 5.2 : 1 + rnd() * 20, y = onWalk ? 1 + rnd() * 14 : 10.2 + rnd() * 3.6;
+    const [sx, sy] = P(x, y); el("circle", { cx: sx, cy: sy, r: .9, fill: LIGHT, opacity: .7 });
+  }
+  el("polygon", { points: pts([[9,0],[13,0],[13,16],[9,16]]), fill: "rgba(20,19,18,.04)", stroke: INK, "stroke-width": 1.2 });
+  el("polygon", { points: pts([[0,11],[22,11],[22,13],[0,13]]), fill: "rgba(20,19,18,.03)", stroke: GREY, "stroke-width": 1 });
+  el("polyline", { points: pts([[11,0],[11,16]]), fill: "none", stroke: GREY, "stroke-width": 1, "stroke-dasharray": "4 5" });
+
+  // blocks: tone from gradation, not hue
+  function box(x0, y0, x1, y1, h) {
+    el("polygon", { points: pts([[x0,y1,0],[x1,y1,0],[x1,y1,h],[x0,y1,h]]), fill: "#ddd6ca", stroke: INK, "stroke-width": 1.2 });
+    el("polygon", { points: pts([[x1,y0,0],[x1,y1,0],[x1,y1,h],[x1,y0,h]]), fill: "#cfc7b9", stroke: INK, "stroke-width": 1.2 });
+    el("polygon", { points: pts([[x0,y0,h],[x1,y0,h],[x1,y1,h],[x0,y1,h]]), fill: "#f5f2ec", stroke: INK, "stroke-width": 1.2 });
+    for (let z = 1.5; z < h; z += 1.5) el("polyline", { points: pts([[x0,y1,z],[x1,y1,z],[x1,y0,z]]), fill: "none", stroke: LIGHT, "stroke-width": .8 });
+  }
+  box(1, 1, 8, 9, 4.5);
+  box(14, 1, 21, 9, 3.5);
+  // door on block A, with the raised entrance step
+  el("polygon", { points: pts([[8,5.6,0],[8,7,0],[8,7,1.6],[8,5.6,1.6]]), fill: "rgba(199,55,42,.12)", stroke: RED, "stroke-width": 1.3 });
+
+  function tree(x, y) {
+    const [bx, by] = P(x, y), [tx, ty] = P(x, y, 1.8);
+    el("line", { x1: bx, y1: by, x2: tx, y2: ty, stroke: GREY, "stroke-width": 1.1 });
+    for (const [dx, dy, r] of [[-7, -2, 9], [7, -3, 9], [0, -11, 10]])
+      el("circle", { cx: tx + dx, cy: ty + dy, r, fill: "rgba(245,242,236,.85)", stroke: GREY, "stroke-width": 1 });
+  }
+  tree(3, 14.5); tree(17, 14.6); tree(20, 10); tree(6.5, 10.2);
+
+  function cone(x, y, ang, spread, len, color, fill) {
+    const a1 = ang - spread, a2 = ang + spread;
+    el("polygon", { points: pts([[x,y],[x + Math.cos(a1)*len, y + Math.sin(a1)*len],[x + Math.cos(a2)*len, y + Math.sin(a2)*len]]),
+      fill, stroke: color, "stroke-width": 1, "stroke-dasharray": "3 3" });
+  }
+  function camPin(x, y, color) {
+    const [bx, by] = P(x, y), [tx, ty] = P(x, y, 1.6);
+    el("line", { x1: bx, y1: by, x2: tx, y2: ty, stroke: color, "stroke-width": 1.3 });
+    el("rect", { x: tx - 7, y: ty - 6, width: 14, height: 10, rx: 1, fill: CARD, stroke: color, "stroke-width": 1.3 });
+    el("circle", { cx: tx, cy: ty - 1, r: 2.3, fill: color });
+  }
+  function label(x, y, z, text, color, dx = 10, anchor = "start") {
+    const [sx, sy] = P(x, y, z);
+    const t = el("text", { x: sx + dx, y: sy + 4, fill: color, "font-family": "SF Mono, ui-monospace, Menlo, monospace", "font-size": 10, "letter-spacing": ".06em", "text-anchor": anchor });
+    t.textContent = text;
+    const b = t.getBBox();
+    const r = document.createElementNS(NS, "rect");
+    Object.entries({ x: b.x - 5, y: b.y - 3, width: b.width + 10, height: b.height + 6, fill: CARD, stroke: color, "stroke-width": .8 }).forEach(([k, v]) => r.setAttribute(k, v));
+    svg.insertBefore(r, t);
+  }
+  function issue(x, y, color) {
+    const [bx, by] = P(x, y), [tx, ty] = P(x, y, 2.4);
+    el("ellipse", { cx: bx, cy: by, rx: 9, ry: 4.5, fill: "none", stroke: color, "stroke-width": 1.2 });
+    el("line", { x1: bx, y1: by, x2: tx, y2: ty, stroke: color === KHAKI ? INK : color, "stroke-width": 1.4 });
+    el("circle", { cx: tx, cy: ty, r: 5.5, fill: color, stroke: color === KHAKI ? INK : color, "stroke-width": 1.2 });
+  }
+
+  cone(11.2, 14.6, -Math.PI / 2, .32, 6.2, LIGHT, "rgba(119,114,107,.08)");   // night robot view: too dark
+  cone(13.6, 9.6, -2.30, .36, 4.6, INK, "rgba(20,19,18,.08)");               // fresh phone view of the bag
+
+  const [rx, ry] = P(10.2, 12.4);
+  el("image", { href: "assets/go2-render.png", x: rx - 46, y: ry - 72, width: 90, height: 82, style: "filter: sepia(.35) saturate(.85) contrast(1.06) brightness(.92)" });
+
+  issue(10.4, 6.0, KHAKI);  // CP-2 paper bag: flag for service
+  issue(8.0, 6.3, RED);     // CP-1 entrance step: blocked
+  camPin(11.2, 14.6, GREY);
+  camPin(13.6, 9.6, INK);
+
+  label(10.4, 6.0, 2.4, "CP-2 · BAG ON PATH · 7:27 PM", INK, 14);
+  label(8.0, 6.3, 2.4, "CP-1 · ENTRANCE STEP · 7:29 PM", REDT, -14, "end");
+  label(11.2, 14.6, 1.6, "7:27 PM · TOO DARK", "#5f5a54", 14);
+  label(13.6, 9.6, 1.6, "FRESH VIEW", INK, 14);
+  const b = svg.getBBox();
+  svg.setAttribute("viewBox", `${b.x - 8} ${b.y - 8} ${b.width + 16} ${b.height + 16}`);
+})();
+</script>
+</body>
+</html>
