@@ -11,14 +11,14 @@
   --g1: #4a4642; --g2: #5f5a54; --g3: #77726b; --g4: #a39d94;
   --paper: #e9e4db; --card: #f5f2ec; --card2: #efebe4; --shade: #ddd6ca;
   --red: #c7372a; --red-t: #b3301f; --red-m: #e0786b; --khaki: #b3a37f;
-  --hair: rgba(20,19,18,.16);
+  --hair: rgba(20,19,18,.16); --dhair: rgba(233,228,219,.14);
   --disp: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --mono: "SF Mono", ui-monospace, Menlo, monospace;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 1240px; height: 1754px; background: var(--paper); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 body { font-family: "Inter", sans-serif; color: var(--ink); font-size: 15px; line-height: 1.45; }
-.page { position: relative; width: 1240px; height: 1754px; overflow: hidden; padding: 48px 60px 0;
+.page { position: relative; width: 1240px; height: 1754px; overflow: hidden; padding: 44px 60px 0;
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .08 0 0 0 0 .07 0 0 0 0 .06 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
     linear-gradient(rgba(20,19,18,.045) 1px, transparent 1px) 0 0 / 24px 24px,
@@ -28,13 +28,6 @@ body { font-family: "Inter", sans-serif; color: var(--ink); font-size: 15px; lin
 .disp { font-family: var(--disp); font-weight: 700; letter-spacing: -.02em; }
 .card { background: var(--card); border: 1px solid var(--hair); border-radius: 2px; }
 .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid currentColor; flex: none; }
-.dot.ran { background: currentColor; }
-.dot.wired { background: linear-gradient(90deg, currentColor 50%, transparent 50%); }
-.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 7px; border: 1px solid var(--ink); background: var(--card); color: var(--ink);
-  font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
-.sw { display: inline-block; width: 10px; height: 10px; flex: none; }
-.a-flag { background: var(--khaki); } .a-human { border: 1.5px solid var(--g3); }
-.hd { display: flex; justify-content: space-between; color: var(--g1); }
 
 /* masthead */
 .mast { display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
@@ -42,97 +35,125 @@ body { font-family: "Inter", sans-serif; color: var(--ink); font-size: 15px; lin
 .mast .mono { color: var(--g1); }
 .vision { background: var(--ink); color: var(--card); padding: 7px 12px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
 
-.thesis { font-size: 54px; line-height: 1.02; margin-top: 32px; width: 1100px; }
+.thesis { font-size: 40px; line-height: 1.04; margin-top: 22px; width: 1110px; }
 .thesis span { color: var(--g2); }
 
-.sh { display: flex; align-items: center; gap: 12px; margin: 30px 0 12px; color: var(--g1); }
+.sh { display: flex; align-items: center; gap: 12px; margin: 18px 0 9px; color: var(--g1); }
 .sh b { color: var(--ink); font-weight: 600; }
 .sh::after { content: ""; flex: 1; height: 1px; background: var(--hair); }
 
-/* row A */
-.rowA { display: grid; grid-template-columns: 450px minmax(0, 1fr); gap: 20px; }
-.cascade { padding: 20px 22px 18px; }
-.tier { padding: 12px 0 12px 16px; border-left: 3px solid; }
-.tier + .tier { margin-top: 12px; }
-.tier .top { display: flex; align-items: center; gap: 10px; color: var(--g1); }
-.tier .cost { margin-left: auto; border: 1px solid var(--ink); color: var(--ink); padding: 1px 6px; font-size: 10px; }
-.tier h4 { font-family: var(--disp); font-weight: 700; letter-spacing: -.015em; font-size: 21px; line-height: 1.15; margin: 6px 0 6px; }
-.tier .det { color: var(--g1); font-size: 10.5px; line-height: 1.6; }
-.tier .tags { display: flex; flex-wrap: wrap; gap: 5px; }
-.tier .tags span { border: 1px solid var(--hair); background: var(--card2); padding: 2px 6px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .02em; color: var(--ink3); }
-.t0 { border-color: var(--g4); } .t1 { border-color: var(--g1); margin-left: 18px; } .t2 { border-color: var(--ink); margin-left: 36px; }
-.funnel { margin-top: 18px; display: grid; gap: 5px; }
-.funnel div { display: flex; align-items: center; gap: 10px; }
-.funnel i { height: 8px; display: block; flex: none; }
-.funnel .mono { font-size: 10px; color: var(--g1); }
+/* ---------- 01 twin: the one dark panel ---------- */
+.tw { background: var(--ink); color: var(--paper); border-radius: 2px; display: grid;
+  grid-template-columns: 150px 1fr 280px; grid-template-rows: 34px 590px 96px; overflow: hidden; }
+.tw .mono { font-size: 9.5px; letter-spacing: .09em; }
+.tw .top { grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; padding: 0 14px; border-bottom: 1px solid var(--dhair); background: var(--ink2); }
+.tw .top .nm { font-family: var(--disp); font-weight: 700; font-size: 13px; letter-spacing: -.005em; color: var(--card); text-transform: none; }
+.tw .top .g { color: var(--g4); }
+.tw .tabs { display: flex; margin-left: 10px; border: 1px solid var(--dhair); }
+.tw .tabs span { padding: 3px 9px; color: var(--g4); }
+.tw .tabs span.on { background: var(--paper); color: var(--ink); }
+.tw .concept { margin-left: auto; border: 1px solid var(--g4); color: var(--card); padding: 3px 8px; }
 
-.twin { padding: 18px 18px 14px; display: flex; flex-direction: column; }
-.twin svg { display: block; width: 100%; flex: 1; min-height: 0; }
-.twin .cap { display: flex; justify-content: space-between; color: var(--g2); font-size: 10px; margin-top: 6px; }
+.rail { border-right: 1px solid var(--dhair); padding: 14px 12px; display: flex; flex-direction: column; gap: 6px; background: #171614; }
+.rail h6 { font: inherit; color: var(--g3); margin: 8px 0 2px; }
+.rail h6:first-child { margin-top: 0; }
+.ly { display: grid; grid-template-columns: 11px 1fr; gap: 0 8px; align-items: center; }
+.ly i { width: 9px; height: 9px; border: 1px solid var(--g4); background: var(--paper); }
+.ly b { font-weight: 400; color: var(--card); }
+.ly small { grid-column: 2; color: var(--g3); font-size: 8.5px; letter-spacing: .04em; white-space: nowrap; }
+.lg { display: flex; align-items: center; gap: 8px; color: var(--paper); }
+.lg svg { flex: none; }
 
-/* row B */
-.rowB { display: grid; grid-template-columns: minmax(0, 1fr) 430px; gap: 20px; }
-.memory { padding: 20px 22px 0; display: flex; flex-direction: column; }
-.tl { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 16px; }
-.tl::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 34px; height: 2px;
+.scene { position: relative; background: #1a1816; }
+.scene svg { display: block; }
+
+.insp { border-left: 1px solid var(--dhair); background: #171614; padding: 12px 14px; display: flex; flex-direction: column; }
+.insp .row1 { display: flex; justify-content: space-between; align-items: center; color: var(--g4); }
+.st-open { background: var(--red); color: var(--card); padding: 2px 7px; }
+.insp h5 { font-family: var(--disp); font-weight: 700; font-size: 21px; letter-spacing: -.02em; color: var(--card); margin: 6px 0 1px; line-height: 1.1; text-transform: none; }
+.insp .loc { color: var(--g4); }
+.fr { position: relative; margin-top: 20px; width: 252px; height: 141.75px; background: #000; }
+.fr img { width: 100%; height: 100%; display: block; }
+.fr .sam { position: absolute; left: 15.23%; top: 40.42%; width: 32.66%; height: 59.44%; border: 1.5px solid var(--card); }
+.fr .sam::before { content: "SAM · PAPER BAG"; position: absolute; left: -1.5px; top: -15px; background: var(--card); color: var(--ink); font-family: var(--mono); font-size: 8.5px; letter-spacing: .08em; padding: 1px 4px; white-space: nowrap; }
+.fr .cap { position: absolute; right: 5px; top: 5px; background: rgba(20,19,18,.82); color: var(--paper); padding: 1px 5px; font-size: 8.5px !important; }
+.kv { margin-top: 10px; display: grid; grid-template-columns: 66px 1fr; gap: 4px 8px; }
+.kv dt { color: var(--g3); } .kv dd { color: var(--paper); }
+.obs { margin-top: 12px; border-top: 1px solid var(--dhair); padding-top: 8px; }
+.obs .h { color: var(--g3); margin-bottom: 5px; }
+.ob { display: grid; grid-template-columns: 14px 1fr auto; gap: 7px; align-items: center; padding: 3px 0; color: var(--g4); }
+.ob.win { color: var(--card); }
+.ob i { width: 10px; height: 10px; display: block; }
+.ob .s { text-align: right; }
+.win .s { color: var(--red-m); }
+.hz { background: repeating-linear-gradient(45deg, #a39d94 0 1.4px, #1e1c1a 1.4px 3.5px); border: 1px solid #a39d94; }
+.rulebox { margin-top: auto; border: 1px solid var(--paper); padding: 7px 9px; color: var(--card); display: flex; gap: 8px; align-items: center; }
+.rulebox::before { content: ""; width: 7px; height: 7px; background: var(--card); flex: none; }
+
+.scrub { grid-column: 1 / -1; border-top: 1px solid var(--dhair); background: var(--ink2); }
+.scrub svg { display: block; }
+
+/* ---------- 02 ---------- */
+.rowB { display: grid; grid-template-columns: 500px minmax(0, 1fr); gap: 20px; }
+.cascade { padding: 16px 20px; display: flex; flex-direction: column; gap: 9px; }
+.tier { padding: 4px 0 4px 14px; border-left: 3px solid; }
+.tier .tp { display: flex; align-items: center; gap: 10px; color: var(--g1); font-size: 10px; }
+.tier .cost { margin-left: auto; border: 1px solid var(--ink); color: var(--ink); padding: 0 6px; font-size: 9.5px; }
+.tier h4 { font-family: var(--disp); font-weight: 700; letter-spacing: -.015em; font-size: 17px; line-height: 1.15; margin: 3px 0 3px; }
+.tier .det { color: var(--g1); font-size: 9.5px; line-height: 1.5; }
+.t0 { border-color: var(--g4); } .t1 { border-color: var(--g1); margin-left: 14px; } .t2 { border-color: var(--ink); margin-left: 28px; }
+
+.memory { padding: 16px 22px 0; display: flex; flex-direction: column; }
+.memory .k { color: var(--g1); font-size: 10px; }
+.tl { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 14px; }
+.tl::before { content: ""; position: absolute; left: 12.5%; right: 12.5%; top: 32px; height: 2px;
   background: linear-gradient(90deg, var(--ink) 0 33.3%, var(--red) 33.3% 100%); }
 .v { text-align: center; }
 .v .when { color: var(--g1); font-size: 10px; }
-.v .pin { width: 18px; height: 18px; border-radius: 50%; margin: 7px auto 10px; position: relative; z-index: 1; background: var(--ink); border: 2px solid var(--ink); }
+.v .pin { width: 18px; height: 18px; border-radius: 50%; margin: 6px auto 8px; position: relative; z-index: 1; background: var(--ink); border: 2px solid var(--ink); }
 .v .pin.blocked { background: var(--red); border-color: var(--red); }
-.v .pin.dark { background: var(--card); border: 2px dashed var(--g3); }
-.v .obs { font-family: var(--disp); font-weight: 700; font-size: 17px; letter-spacing: -.01em; }
-.v .st { font-size: 10px; color: var(--g2); margin-top: 3px; line-height: 1.5; }
+.v .pin.dark { background: repeating-linear-gradient(45deg, var(--g3) 0 1.5px, var(--card) 1.5px 4px); border: 2px solid var(--g3); }
+.v .ob2 { font-family: var(--disp); font-weight: 700; font-size: 17px; letter-spacing: -.01em; }
+.v .st { font-size: 10px; color: var(--g2); margin-top: 2px; line-height: 1.5; }
 .v .st b { color: var(--red-t); font-weight: 600; }
-.rule { margin: auto -22px 0; padding: 14px 22px; background: var(--ink2); color: var(--g4); display: flex; align-items: baseline; gap: 16px; font-size: 13px; line-height: 1.4; }
-.rule b { color: var(--card); font-family: var(--disp); font-weight: 700; letter-spacing: -.015em; font-size: 21px; white-space: nowrap; }
+.rule { margin: auto -22px 0; padding: 12px 22px; background: var(--ink2); color: var(--g4); display: flex; align-items: baseline; gap: 16px; font-size: 13px; line-height: 1.4; }
+.rule b { color: var(--card); font-family: var(--disp); font-weight: 700; letter-spacing: -.015em; font-size: 19px; white-space: nowrap; }
 
-.ev { padding: 12px; }
-.ev .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.ev .ph { position: relative; height: 168px; overflow: hidden; background: #000; }
-.ev .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ev .tagl { position: absolute; left: 8px; top: 8px; background: var(--ink); color: var(--card); padding: 2px 7px; }
-.ev .ph .chip { position: absolute; left: 8px; bottom: 8px; }
-.ev .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; color: var(--g1); font-size: 10px; }
-.ev .foot2 { font-size: 12.5px; color: var(--g1); margin-top: 8px; }
-
-/* row C */
+/* ---------- 03 ---------- */
 .rowC { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
-.col { padding: 20px 22px 22px; }
-.col .k { color: var(--g1); margin-bottom: 8px; }
-.col h3 { font-size: 24px; line-height: 1.08; margin-bottom: 14px; }
+.col { padding: 16px 18px 16px; display: flex; flex-direction: column; }
+.col .k { color: var(--g1); margin-bottom: 7px; }
+.col h3 { font-size: 22px; line-height: 1.08; margin-bottom: 13px; }
 ul.ticks { list-style: none; }
 ul.ticks li { display: flex; gap: 10px; align-items: baseline; font-size: 14px; line-height: 1.35; }
 ul.ticks li + li { margin-top: 8px; }
 ul.ticks li .dot { position: relative; top: 1px; }
 ul.ticks li small { display: block; color: var(--g1); font-size: 12.5px; }
-.gate { margin-top: 16px; padding: 10px 12px; border: 1px dashed var(--g3); font-size: 13px; color: var(--g1); line-height: 1.4; }
-.gate b { color: var(--ink); font-weight: 600; }
-.nomotor { margin-top: 12px; display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--ink); padding: 4px 9px; font-weight: 600; }
-.nomotor::before { content: ""; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--ink); background: linear-gradient(135deg, transparent 44%, var(--ink) 44% 56%, transparent 56%); }
+.stack { display: grid; gap: 8px; }
+.stack div { display: grid; grid-template-columns: 64px 1fr; gap: 10px; align-items: baseline; font-size: 14px; line-height: 1.32; }
+.stack .mono { font-size: 9.5px; color: var(--ink); border: 1px solid var(--ink); padding: 1px 0; text-align: center; }
+.stack small { display: block; color: var(--g1); font-size: 12px; }
+.guard { margin-top: auto; padding-top: 9px; border-top: 1px dashed var(--g3); color: var(--g1); font-size: 9px; }
 .srcs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.src { text-align: center; padding: 7px 4px; border: 1px solid var(--ink3); font-size: 13px; font-weight: 500; }
-.merge { height: 20px; position: relative; }
-.merge::before { content: ""; position: absolute; left: 16.6%; right: 16.6%; top: 0; height: 10px; border: 1px solid var(--ink); border-top: none; }
-.merge::after { content: ""; position: absolute; left: 50%; top: 10px; width: 1px; height: 10px; background: var(--ink); }
-.hub { text-align: center; padding: 10px; background: var(--ink2); color: var(--card); font-size: 14px; font-weight: 600; }
+.src { text-align: center; padding: 6px 4px; border: 1px solid var(--ink3); font-size: 13px; font-weight: 500; }
+.merge { height: 18px; position: relative; }
+.merge::before { content: ""; position: absolute; left: 16.6%; right: 16.6%; top: 0; height: 9px; border: 1px solid var(--ink); border-top: none; }
+.merge::after { content: ""; position: absolute; left: 50%; top: 9px; width: 1px; height: 9px; background: var(--ink); }
+.hub { text-align: center; padding: 9px; background: var(--ink2); color: var(--card); font-size: 14px; font-weight: 600; }
 .hub small { display: block; font-size: 12px; color: var(--g4); font-weight: 400; }
-.down { height: 14px; position: relative; } .down::after { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 14px; background: var(--ink); }
-.sink { text-align: center; padding: 8px; border: 1px solid var(--ink3); font-size: 14px; font-weight: 600; }
+.down { height: 12px; position: relative; } .down::after { content: ""; position: absolute; left: 50%; top: 0; width: 1px; height: 12px; background: var(--ink); }
+.sink { text-align: center; padding: 7px; border: 1px solid var(--ink3); font-size: 14px; font-weight: 600; }
 .sink small { display: block; font-size: 12px; color: var(--g1); font-weight: 400; }
 
-/* measure */
-.measure { margin-top: 20px; padding: 16px 22px; background: var(--ink2); color: var(--card); display: flex; align-items: center; gap: 24px; border-radius: 2px; }
+.measure { margin-top: 16px; padding: 13px 22px; background: var(--ink2); color: var(--card); display: flex; align-items: center; gap: 24px; border-radius: 2px; }
 .measure .k { white-space: nowrap; }
-.measure .note { color: var(--g4); margin-top: 3px; font-size: 13px; }
+.measure .note { color: var(--g4); margin-top: 2px; font-size: 13px; }
 .metrics { display: flex; gap: 8px; flex: 1; justify-content: flex-end; }
-.metric { white-space: nowrap; padding: 6px 11px; border: 1px solid rgba(233,228,219,.4); font-size: 14px; font-weight: 500; }
+.metric { white-space: nowrap; padding: 5px 11px; border: 1px solid rgba(233,228,219,.4); font-size: 14px; font-weight: 500; }
 
-.foot { position: absolute; left: 60px; right: 60px; bottom: 32px; display: flex; justify-content: space-between; align-items: center;
-  font-size: 12.5px; color: var(--g1); border-top: 1px solid var(--ink); padding-top: 12px; }
+.foot { position: absolute; left: 60px; right: 60px; bottom: 30px; display: flex; justify-content: space-between; align-items: center;
+  font-size: 12.5px; color: var(--g1); border-top: 1px solid var(--ink); padding-top: 11px; }
 .foot b { color: var(--ink); font-weight: 600; }
-.foot .st { display: flex; gap: 16px; align-items: center; }
-.foot .st span { display: inline-flex; align-items: center; gap: 6px; }
 </style>
 </head>
 <body>
@@ -145,73 +166,110 @@ ul.ticks li small { display: block; color: var(--g1); font-size: 12.5px; }
 
   <h1 class="thesis disp" data-w><span>Every robot, phone and camera feeds one memory of a place.</span> Nothing is called fixed until it’s seen fixed.</h1>
 
-  <div class="sh mono"><b>01</b>Perception cascade · place memory</div>
-  <section class="rowA">
+  <div class="sh mono"><b>01</b>The twin · one route, every source</div>
+  <section class="tw">
+    <div class="top mono">
+      <span class="nm">BenBen Twin</span><span class="g">Estate · north quad</span>
+      <span class="tabs"><span class="on">Operations</span><span>Engineering</span><span>Evidence</span></span>
+      <span class="concept">2032 concept · illustrative</span>
+    </div>
+
+    <aside class="rail mono">
+      <h6>Layers</h6>
+      <div class="ly"><i></i><b>Geometry</b><small>mesh · kerbs</small></div>
+      <div class="ly"><i></i><b>Appearance</b><small>splat · frames</small></div>
+      <div class="ly"><i></i><b>Semantics</b><small>paths · ramps</small></div>
+      <div class="ly"><i></i><b>Issues</b><small>open · dark · clear</small></div>
+      <div class="ly"><i></i><b>Sources</b><small>robots · phones</small></div>
+      <h6>Issue state</h6>
+      <div class="lg"><svg width="14" height="14"><path d="M7 1 L13 7 L7 13 L1 7Z" fill="#c7372a"/></svg>Open</div>
+      <div class="lg"><svg width="14" height="14"><circle cx="7" cy="7" r="5.5" fill="url(#hatchL)" stroke="#a39d94"/></svg>Too dark</div>
+      <div class="lg"><svg width="14" height="14"><circle cx="7" cy="7" r="5.5" fill="#b3a37f"/><path d="M4.3 7.2 L6.3 9.1 L9.8 5.2" fill="none" stroke="#141312" stroke-width="1.5"/></svg>Cleared</div>
+      <h6>Network</h6>
+      <div class="lg"><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" stroke="#efebe4" stroke-width="2.4"/></svg>Active route</div>
+      <div class="lg"><svg width="22" height="8"><rect x="1" y="1" width="20" height="6" fill="#35312c" stroke="#77726b" stroke-width=".7"/></svg>Step-free</div>
+      <div class="lg"><svg width="22" height="8"><path d="M3 1v6M7 1v6M11 1v6M15 1v6M19 1v6" stroke="#77726b"/></svg>Steps</div>
+      <div class="lg"><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" stroke="#e9e4db" stroke-width="1.2" stroke-dasharray="4 3"/></svg>Next look</div>
+      <h6>Provenance</h6>
+      <div class="lg"><svg width="22" height="10"><path d="M1 9 L11 1 L21 9Z" fill="rgba(239,235,228,.08)" stroke="#a39d94" stroke-width=".7" stroke-dasharray="2 2"/></svg>View cone</div>
+      <div class="lg"><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" stroke="#a39d94" stroke-width=".8" stroke-dasharray="1 2.4"/></svg>Source → obs</div>
+      <svg width="0" height="0" style="position:absolute"><defs><pattern id="hatchL" width="3.5" height="3.5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3.5" height="3.5" fill="#1e1c1a"/><line x1="0" y1="0" x2="0" y2="3.5" stroke="#a39d94" stroke-width="1.4"/></pattern></defs></svg>
+    </aside>
+
+    <div class="scene"><svg id="iso" width="690" height="590" viewBox="0 0 690 590" xmlns="http://www.w3.org/2000/svg"></svg></div>
+
+    <aside class="insp mono">
+      <div class="row1"><span>Selected · CP-2</span><span class="st-open">Open</span></div>
+      <h5>Bag on path</h5>
+      <div class="loc">Spine path · Block A → pickup</div>
+      <div class="fr"><img src="assets/twin32-frame-048.jpg" alt="BenBen camera frame: paper bag on a path at night, outlined by SAM"><span class="sam"></span><span class="cap mono">BenBen camera · real frame</span></div>
+      <dl class="kv">
+        <dt>Object</dt><dd>Paper bag · temporary</dd>
+        <dt>Affects</dt><dd>Wheelchair · cane · stroller</dd>
+        <dt>Action</dt><dd>Flag for service</dd>
+        <dt>Evidence</dt><dd>Frame · mask · pose</dd>
+        <dt>Route</dt><dd style="color:var(--red-m)">Blocks step-free</dd>
+      </dl>
+      <div class="obs">
+        <div class="h">Observations · newest first</div>
+        <div class="ob win"><i style="background:var(--card)"></i><span>BenBen · usable</span><span class="s">Open</span></div>
+        <div class="ob"><i class="hz"></i><span>BenBen · too dark</span><span class="s">Ignored</span></div>
+        <div class="ob"><i style="border:1px solid var(--g4)"></i><span>Phone · usable</span><span class="s">Open</span></div>
+        <div class="ob"><i style="border:1px solid var(--g4)"></i><span>Camera · usable</span><span class="s">Clear</span></div>
+      </div>
+      <div class="obs plan">
+        <div class="h">Planner · next look</div>
+        <div class="ob win"><i style="border-top:1.5px dashed var(--card);height:0;margin-top:5px"></i><span>BenBen → CP-3</span><span class="s" style="color:var(--g4)">Too dark</span></div>
+      </div>
+      <div class="rulebox">Latest usable observation wins</div>
+    </aside>
+
+    <div class="scrub"><svg id="scrub" width="1120" height="96" viewBox="0 0 1120 96" xmlns="http://www.w3.org/2000/svg"></svg></div>
+  </section>
+
+  <div class="sh mono"><b>02</b>Perception cascade · place memory</div>
+  <section class="rowB">
     <div class="cascade card">
       <div class="tier t0">
-        <div class="top mono"><span>Tier 0</span><span class="cost">Free</span></div>
+        <div class="tp mono"><span>Tier 0</span><span class="cost">Free</span></div>
         <h4 data-w>Is this view usable? Did the place change?</h4>
-        <div class="det mono">Image quality · pose · LiDAR geometry change · works in the dark</div>
+        <div class="det mono">Image quality · pose · LiDAR geometry change</div>
       </div>
       <div class="tier t1">
-        <div class="top mono"><span>Tier 1</span><span class="cost">Local</span></div>
+        <div class="tp mono"><span>Tier 1</span><span class="cost">Local</span></div>
         <h4 data-w>What changed?</h4>
-        <div class="det mono" style="margin-bottom:6px">Meta open weights, on the device</div>
-        <div class="tags"><span>Muse Spark Open* or similar*</span><span>SAM 2.1</span><span>V-JEPA 2 or Perception Encoder: keyframes*</span></div>
+        <div class="det mono">Meta open weights on the device · SAM 2.1 · V-JEPA 2*</div>
       </div>
       <div class="tier t2">
-        <div class="top mono"><span>Tier 2</span><span class="cost">API</span></div>
+        <div class="tp mono"><span>Tier 2</span><span class="cost">API</span></div>
         <h4 data-w>Is it a barrier? What’s the evidence?</h4>
         <div class="det mono">Muse Spark + SAM 3.1 · judge and cite</div>
       </div>
-      <div class="funnel">
-        <div><i style="width:100%;max-width:220px;background:var(--g4)"></i><span class="mono">Every frame</span></div>
-        <div><i style="width:110px;background:var(--g1)"></i><span class="mono">Frames that changed</span></div>
-        <div><i style="width:28px;background:var(--ink)"></i><span class="mono">The few worth a call</span></div>
-      </div>
     </div>
 
-    <div class="twin card">
-      <div class="hd mono"><span>One route, every source</span></div>
-      <svg id="iso" viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg"></svg>
-      <div class="cap"><span class="mono">schematic · anchors placed by hand</span><span class="mono">Robot: Unitree Go2 model render</span></div>
-    </div>
-  </section>
-
-  <div class="sh mono"><b>02</b>One checkpoint across visits</div>
-  <section class="rowB">
     <div class="memory card">
+      <div class="k mono">One checkpoint across visits</div>
       <div class="tl">
-        <div class="v"><div class="when mono">Visit 1 · robot</div><div class="pin"></div><div class="obs">Clear</div><div class="st mono">usable · clear</div></div>
-        <div class="v"><div class="when mono">Visit 2 · phone</div><div class="pin blocked"></div><div class="obs">Blocked</div><div class="st mono">usable · <b>blocked</b></div></div>
-        <div class="v"><div class="when mono">Visit 3 · robot</div><div class="pin dark"></div><div class="obs" style="color:var(--g2)">Too dark</div><div class="st mono">not usable ·<br><b>stays blocked</b></div></div>
-        <div class="v"><div class="when mono">Visit 4 · camera</div><div class="pin"></div><div class="obs">Cleared</div><div class="st mono">usable · cleared</div></div>
+        <div class="v"><div class="when mono">Visit 1 · robot</div><div class="pin"></div><div class="ob2">Clear</div><div class="st mono">usable · clear</div></div>
+        <div class="v"><div class="when mono">Visit 2 · phone</div><div class="pin blocked"></div><div class="ob2">Blocked</div><div class="st mono">usable · <b>blocked</b></div></div>
+        <div class="v"><div class="when mono">Visit 3 · robot</div><div class="pin dark"></div><div class="ob2" style="color:var(--g2)">Too dark</div><div class="st mono">not usable · <b>stays blocked</b></div></div>
+        <div class="v"><div class="when mono">Visit 4 · camera</div><div class="pin"></div><div class="ob2">Cleared</div><div class="st mono">usable · cleared</div></div>
       </div>
-      <div class="rule"><b data-w>Latest usable observation wins.</b><span data-w>Observations are append-only. A dark frame or an empty detection never clears an issue.</span></div>
-    </div>
-
-    <div class="ev card">
-      <div class="pair">
-        <div class="ph"><img src="assets/op-frame-022.jpg" alt="Dark camera frame"><span class="tagl mono">Before</span><span class="chip"><i class="sw a-human"></i>Too dark · not usable</span></div>
-        <div class="ph"><img src="assets/op-frame-048-sam.jpg" alt="Paper bag outlined by SAM 3.1"><span class="tagl mono">Now</span><span class="chip"><i class="sw a-flag"></i>Flag for service</span></div>
-      </div>
-      <div class="meta"><span class="mono">7:27 PM · too dark</span><span class="mono">Fresh view · SAM box</span></div>
-      <div class="foot2" data-w>Real Nov 4 frames, arranged to show the evidence card.</div>
+      <div class="rule"><b data-w>Latest usable observation wins.</b><span data-w>A dark frame or an empty detection never clears an issue.</span></div>
     </div>
   </section>
 
   <div class="sh mono"><b>03</b>How it scales</div>
   <section class="rowC">
     <div class="col card">
-      <div class="k mono">Autonomy, safely</div>
-      <h3 class="disp" data-w>Patrol a fixed route, not the open world.</h3>
-      <ul class="ticks">
-        <li><i class="dot"></i>Fixed-route checkpoint patrol</li>
-        <li><i class="dot"></i>Deterministic motion guard</li>
-        <li><i class="dot"></i>Human remote override, always</li>
-      </ul>
-      <div class="gate" data-w>A navigation policy is promoted <b>only if it beats replay and sim.</b></div>
-      <div class="nomotor">No text-to-motor</div>
+      <div class="k mono">Autonomy</div>
+      <h3 class="disp" data-w>Patrol the open world, planned live.</h3>
+      <div class="stack">
+        <div><span class="mono">Reasoner</span><span data-w>Muse picks the next look<small>open issues, stale checkpoints, reports</small></span></div>
+        <div><span class="mono">State</span><span data-w>The twin and its place memory</span></div>
+        <div><span class="mono">Action</span><span data-w>A navigation policy drives<small>promoted only if it beats replay and sim</small></span></div>
+      </div>
+      <div class="guard mono">Motion guard · human override · no text-to-motor</div>
     </div>
 
     <div class="col card">
@@ -247,100 +305,331 @@ ul.ticks li small { display: block; color: var(--g1); font-size: 12.5px; }
   </section>
 
   <footer class="foot">
-    <div><b>Meta stack</b> Muse Spark · SAM 3.1 · MapAnything · Voice Transcribe &nbsp;·&nbsp; <span class="mono" style="text-transform:none;letter-spacing:0">github.com/shivraj-S-bhatti/benben</span></div>
-    <div class="st">
-      <span><i class="dot ran"></i>ran Nov 4</span>
-      <span><i class="dot wired"></i>wired, tested offline</span>
-      <span><i class="dot"></i>roadmap</span>
-    </div>
+    <div><b>Meta stack</b> Muse Spark · SAM 3.1 · MapAnything · Voice Transcribe</div>
+    <span class="mono" style="text-transform:none;letter-spacing:0">github.com/shivraj-S-bhatti/benben</span>
   </footer>
 </div>
 <script>
-// Isometric schematic, ink line-art: two blocks, a walkway, trees, two checkpoints and two camera views.
+// 2032 concept twin: an illustrative isometric estate in ink, drawn in painter's order
+// (ground, network, cones, route; then objects sorted far to near; then provenance and labels).
 (function () {
   const svg = document.getElementById("iso"), NS = "http://www.w3.org/2000/svg";
-  const K = 15.5, OX = 262, OY = 92;
-  const P = (x, y, z = 0) => [OX + (x - y) * K * 0.866, OY + (x + y) * K * 0.5 - z * K];
+  const K = 16.5, C30 = 0.866, OX = 271, OY = 110;
+  const P = (x, y, z = 0) => [OX + (x - y) * K * C30, OY + (x + y) * K * 0.5 - z * K];
   const pts = a => a.map(p => P(...p).map(v => v.toFixed(1)).join(",")).join(" ");
   const el = (tag, attrs, parent = svg) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
-  const INK = "#2a2724", GREY = "#77726b", LIGHT = "#a39d94", RED = "#c7372a", REDT = "#b3301f", KHAKI = "#b3a37f", CARD = "#f5f2ec";
+  const PAPER = "#e9e4db", CARD = "#efebe4", G4 = "#a39d94", G3 = "#77726b", G1 = "#4a4642", RED = "#c7372a", REDM = "#e0786b", KHAKI = "#b3a37f", INK = "#141312";
+  const MONO = "SF Mono, ui-monospace, Menlo, monospace";
 
-  el("polygon", { points: pts([[0,0],[22,0],[22,16],[0,16]]), fill: "rgba(20,19,18,.025)", stroke: LIGHT, "stroke-width": 1 });
-  // LiDAR footprint underlay
-  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-  for (let i = 0; i < 520; i++) {
-    const onWalk = rnd() < .55;
-    const x = onWalk ? 8.4 + rnd() * 5.2 : 1 + rnd() * 20, y = onWalk ? 1 + rnd() * 14 : 10.2 + rnd() * 3.6;
-    const [sx, sy] = P(x, y); el("circle", { cx: sx, cy: sy, r: .9, fill: LIGHT, opacity: .7 });
+  const defs = el("defs", {});
+  defs.innerHTML = `
+    <pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="4" fill="#1e1c1a"/><line x1="0" y1="0" x2="0" y2="4" stroke="#a39d94" stroke-width="1.3"/></pattern>
+    <pattern id="hatchG" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#a39d94" stroke-width=".8" opacity=".55"/></pattern>
+    <marker id="arw" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#e9e4db"/></marker>
+    <clipPath id="clip"><rect width="690" height="590"/></clipPath>`;
+  const root = el("g", { "clip-path": "url(#clip)" });
+  const G = () => el("g", {}, root);
+  const L_ground = G(), L_net = G(), L_cones = G(), L_paths = G(), L_obj = G(), L_prov = G(), L_lab = G();
+
+  // ---------- ground ----------
+  el("polygon", { points: pts([[-3,-3],[37,-3],[37,29],[-3,29]]), fill: "#1d1b19" }, L_ground);
+  for (let i = -2; i <= 36; i += 2) el("polyline", { points: pts([[i,-3],[i,29]]), stroke: G4, "stroke-width": .5, opacity: .09, fill: "none" }, L_ground);
+  for (let j = -2; j <= 28; j += 2) el("polyline", { points: pts([[-3,j],[37,j]]), stroke: G4, "stroke-width": .5, opacity: .09, fill: "none" }, L_ground);
+  function contours(cx, cy, rx, ry, n, wob) {
+    for (let k = 1; k <= n; k++) {
+      const s = k / n, ring = [];
+      for (let a = 0; a <= 64; a++) { const t = a / 64 * Math.PI * 2, w = 1 + wob * Math.sin(3 * t + k);
+        ring.push([cx + Math.cos(t) * rx * s * w, cy + Math.sin(t) * ry * s * w]); }
+      el("polygon", { points: pts(ring), fill: "none", stroke: G4, "stroke-width": .6, opacity: .22 + .06 * (n - k) }, L_ground);
+    }
   }
-  el("polygon", { points: pts([[9,0],[13,0],[13,16],[9,16]]), fill: "rgba(20,19,18,.04)", stroke: INK, "stroke-width": 1.2 });
-  el("polygon", { points: pts([[0,11],[22,11],[22,13],[0,13]]), fill: "rgba(20,19,18,.03)", stroke: GREY, "stroke-width": 1 });
-  el("polyline", { points: pts([[11,0],[11,16]]), fill: "none", stroke: GREY, "stroke-width": 1, "stroke-dasharray": "4 5" });
+  contours(29.2, 19.6, 4.2, 1.7, 5, .06);
+  contours(4.6, 20.1, 3.6, 1.5, 4, .07);
+  contours(28.5, -1.2, 5, 2.6, 4, .05);
+  contours(4.5, 10.6, 3.2, .9, 3, .04);
+  contours(16.4, 15.6, 3.6, 1.5, 4, .06);
 
-  // blocks: tone from gradation, not hue
-  function box(x0, y0, x1, y1, h) {
-    el("polygon", { points: pts([[x0,y1,0],[x1,y1,0],[x1,y1,h],[x0,y1,h]]), fill: "#ddd6ca", stroke: INK, "stroke-width": 1.2 });
-    el("polygon", { points: pts([[x1,y0,0],[x1,y1,0],[x1,y1,h],[x1,y0,h]]), fill: "#cfc7b9", stroke: INK, "stroke-width": 1.2 });
-    el("polygon", { points: pts([[x0,y0,h],[x1,y0,h],[x1,y1,h],[x0,y1,h]]), fill: "#f5f2ec", stroke: INK, "stroke-width": 1.2 });
-    for (let z = 1.5; z < h; z += 1.5) el("polyline", { points: pts([[x0,y1,z],[x1,y1,z],[x1,y0,z]]), fill: "none", stroke: LIGHT, "stroke-width": .8 });
-  }
-  box(1, 1, 8, 9, 4.5);
-  box(14, 1, 21, 9, 3.5);
-  // door on block A, with the raised entrance step
-  el("polygon", { points: pts([[8,5.6,0],[8,7,0],[8,7,1.6],[8,5.6,1.6]]), fill: "rgba(199,55,42,.12)", stroke: RED, "stroke-width": 1.3 });
+  // road, kerbs, markings
+  el("polygon", { points: pts([[-3,23.6],[37,23.6],[37,29],[-3,29]]), fill: "#141312" }, L_ground);
+  for (const yy of [23.6, 23.75]) el("polyline", { points: pts([[-3,yy],[37,yy]]), stroke: G3, "stroke-width": .8, fill: "none" }, L_ground);
+  el("polyline", { points: pts([[-3,26.3],[37,26.3]]), stroke: G3, "stroke-width": .9, "stroke-dasharray": "10 8", fill: "none" }, L_ground);
+  el("polygon", { points: pts([[21.5,23.75],[27.5,23.75],[27.5,25.4],[21.5,25.4]]), fill: "rgba(233,228,219,.05)", stroke: G4, "stroke-width": .8, "stroke-dasharray": "3 2" }, L_ground);
+  for (let x = 22; x < 27.5; x += .7) el("polyline", { points: pts([[x,25.4],[x + .5,24.9]]), stroke: G3, "stroke-width": .6, fill: "none" }, L_ground);
+  el("polygon", { points: pts([[5.8,22.1],[10.2,22.1],[10.2,23.6],[5.8,23.6]]), fill: "#2e2b27", stroke: G3, "stroke-width": .7 }, L_ground);
 
-  function tree(x, y) {
-    const [bx, by] = P(x, y), [tx, ty] = P(x, y, 1.8);
-    el("line", { x1: bx, y1: by, x2: tx, y2: ty, stroke: GREY, "stroke-width": 1.1 });
-    for (const [dx, dy, r] of [[-7, -2, 9], [7, -3, 9], [0, -11, 10]])
-      el("circle", { cx: tx + dx, cy: ty + dy, r, fill: "rgba(245,242,236,.85)", stroke: GREY, "stroke-width": 1 });
-  }
-  tree(3, 14.5); tree(17, 14.6); tree(20, 10); tree(6.5, 10.2);
+  // ---------- step-free network ----------
+  const strips = [
+    [10.05,-3,11.45,23.6],  // spine
+    [21.3,-3,22.7,23.6],    // east path
+    [-3,8.05,37,9.45],      // north cross path
+    [-3,17.7,37,18.9],      // south cross path
+    [-3,21.9,37,23.6],      // pavement along the road
+    [8.5,4.05,10.05,4.95],  // Block A door
+    [18.1,13.6,19,17.7],    // Block E door
+    [19,18.9,19.8,21.9],    // hall link
+  ];
+  for (const [x0,y0,x1,y1] of strips) el("polygon", { points: pts([[x0,y0],[x1,y0],[x1,y1],[x0,y1]]), fill: "#35312c" }, L_net);
+  for (const [x0,y0,x1,y1] of strips) el("polygon", { points: pts([[x0,y0],[x1,y0],[x1,y1],[x0,y1]]), fill: "none", stroke: G3, "stroke-width": .7 }, L_net);
+  // steps, no ramp: Block C to the north path (outside the step-free network)
+  el("polygon", { points: pts([[28.4,6.5],[29.8,6.5],[29.8,8.05],[28.4,8.05]]), fill: "#25221f", stroke: G3, "stroke-width": .7 }, L_net);
+  for (let y = 6.7; y < 8.05; y += .28) el("polyline", { points: pts([[28.4,y],[29.8,y]]), stroke: G4, "stroke-width": .7, opacity: .8, fill: "none" }, L_net);
 
-  function cone(x, y, ang, spread, len, color, fill) {
-    const a1 = ang - spread, a2 = ang + spread;
-    el("polygon", { points: pts([[x,y],[x + Math.cos(a1)*len, y + Math.sin(a1)*len],[x + Math.cos(a2)*len, y + Math.sin(a2)*len]]),
-      fill, stroke: color, "stroke-width": 1, "stroke-dasharray": "3 3" });
-  }
-  function camPin(x, y, color) {
-    const [bx, by] = P(x, y), [tx, ty] = P(x, y, 1.6);
-    el("line", { x1: bx, y1: by, x2: tx, y2: ty, stroke: color, "stroke-width": 1.3 });
-    el("rect", { x: tx - 7, y: ty - 6, width: 14, height: 10, rx: 1, fill: CARD, stroke: color, "stroke-width": 1.3 });
-    el("circle", { cx: tx, cy: ty - 1, r: 2.3, fill: color });
-  }
-  function label(x, y, z, text, color, dx = 10, anchor = "start") {
-    const [sx, sy] = P(x, y, z);
-    const t = el("text", { x: sx + dx, y: sy + 4, fill: color, "font-family": "SF Mono, ui-monospace, Menlo, monospace", "font-size": 10, "letter-spacing": ".06em", "text-anchor": anchor });
-    t.textContent = text;
-    const b = t.getBBox();
-    const r = document.createElementNS(NS, "rect");
-    Object.entries({ x: b.x - 5, y: b.y - 3, width: b.width + 10, height: b.height + 6, fill: CARD, stroke: color, "stroke-width": .8 }).forEach(([k, v]) => r.setAttribute(k, v));
-    svg.insertBefore(r, t);
-  }
-  function issue(x, y, color) {
-    const [bx, by] = P(x, y), [tx, ty] = P(x, y, 2.4);
-    el("ellipse", { cx: bx, cy: by, rx: 9, ry: 4.5, fill: "none", stroke: color, "stroke-width": 1.2 });
-    el("line", { x1: bx, y1: by, x2: tx, y2: ty, stroke: color === KHAKI ? INK : color, "stroke-width": 1.4 });
-    el("circle", { cx: tx, cy: ty, r: 5.5, fill: color, stroke: color === KHAKI ? INK : color, "stroke-width": 1.2 });
+  const B = [
+    { n: "BLOCK A", x0: 1.5, x1: 8.5, y0: 1.5, y1: 7.5, h: 7.4 },
+    { n: "BLOCK B", x0: 13, x1: 19.5, y0: 1, y1: 5.8, h: 5 },
+    { n: "BLOCK C", x0: 24, x1: 30.5, y0: 1.5, y1: 6.5, h: 5.6 },
+    { n: "BLOCK D", x0: 1.5, x1: 7.5, y0: 11.5, y1: 16.8, h: 3.4 },
+    { n: "BLOCK E", x0: 16.5, x1: 20.6, y0: 10.5, y1: 13.6, h: 4.6 },
+    { n: "BLOCK F", x0: 25, x1: 31.5, y0: 10.5, y1: 16, h: 4.4 },
+    { n: "HALL", x0: 13.5, x1: 18.6, y0: 19.6, y1: 21.4, h: 1.8 },
+  ];
+  for (const b of B) el("polygon", { points: pts([[b.x0-.35,b.y0-.35],[b.x1+.45,b.y0-.35],[b.x1+.45,b.y1+.45],[b.x0-.35,b.y1+.45]]), fill: "rgba(0,0,0,.35)" }, L_net);
+
+  // ---------- view cones (ground) ----------
+  function cone(sx, sy, tx, ty, spread, kind) {
+    const a = Math.atan2(ty - sy, tx - sx), d = Math.hypot(tx - sx, ty - sy) * 1.3;
+    const w = [[sx,sy],[sx + Math.cos(a - spread) * d, sy + Math.sin(a - spread) * d],[sx + Math.cos(a + spread) * d, sy + Math.sin(a + spread) * d]];
+    el("polygon", { points: pts(w), fill: kind === "dark" ? "url(#hatchG)" : "rgba(239,235,228,.09)", stroke: G4, "stroke-width": .7, "stroke-dasharray": "2.5 2.5" }, L_cones);
   }
 
-  cone(11.2, 14.6, -Math.PI / 2, .32, 6.2, LIGHT, "rgba(119,114,107,.08)");   // night robot view: too dark
-  cone(13.6, 9.6, -2.30, .36, 4.6, INK, "rgba(20,19,18,.08)");               // fresh phone view of the bag
+  // ---------- route, alt, next look ----------
+  const line = (a, attrs, layer = L_paths) => el("polyline", Object.assign({ points: pts(a), fill: "none", "stroke-linejoin": "round", "stroke-linecap": "round" }, attrs), layer);
+  const routeA = [[8.6,4.5],[10.75,4.5],[10.75,13.2]];
+  const routeB = [[10.75,13.2],[10.75,22.75],[24.5,22.75],[24.5,24.4]];
+  const alt = [[10.75,8.75],[22,8.75],[22,22.75]];
+  line(alt, { stroke: G4, "stroke-width": 1.1, "stroke-dasharray": "1 3.2" });
+  line(routeB, { stroke: CARD, "stroke-width": 2.2, "stroke-dasharray": "5 4", opacity: .5 });
+  line(routeA, { stroke: INK, "stroke-width": 5 });
+  line(routeA, { stroke: CARD, "stroke-width": 2.6 });
+  { const [a1, a2] = [P(10.05,13.2), P(11.45,13.2)]; el("line", { x1: a1[0], y1: a1[1], x2: a2[0], y2: a2[1], stroke: RED, "stroke-width": 3.2 }, L_paths); }
+  line([[10.75,10.3],[10.75,8.75],[22,8.75],[22,12]], { stroke: PAPER, "stroke-width": 1.3, "stroke-dasharray": "5 3", "marker-end": "url(#arw)" });
 
-  const [rx, ry] = P(10.2, 12.4);
-  el("image", { href: "assets/go2-render.png", x: rx - 46, y: ry - 72, width: 90, height: 82, style: "filter: sepia(.35) saturate(.85) contrast(1.06) brightness(.92)" });
+  // ---------- objects, sorted far to near by x + y ----------
+  const objs = [];
+  const add = (key, fn) => objs.push({ key, fn });
 
-  issue(10.4, 6.0, KHAKI);  // CP-2 paper bag: flag for service
-  issue(8.0, 6.3, RED);     // CP-1 entrance step: blocked
-  camPin(11.2, 14.6, GREY);
-  camPin(13.6, 9.6, INK);
+  function building(b) {
+    const { x0, x1, y0, y1, h } = b, g = el("g", {}, L_obj);
+    const face = (a, fill) => el("polygon", { points: pts(a), fill, stroke: "#8a847b", "stroke-width": .9, "stroke-linejoin": "round" }, g);
+    face([[x0,y1,0],[x1,y1,0],[x1,y1,h],[x0,y1,h]], "#2f2b27");
+    face([[x1,y0,0],[x1,y1,0],[x1,y1,h],[x1,y0,h]], "#24211e");
+    for (let z = .35; z + .6 < h; z += 1) {
+      for (let x = x0 + .3; x + .55 < x1; x += 1) el("polygon", { points: pts([[x,y1,z],[x+.55,y1,z],[x+.55,y1,z+.5],[x,y1,z+.5]]), fill: "#3d3933" }, g);
+      for (let y = y0 + .3; y + .55 < y1; y += 1) el("polygon", { points: pts([[x1,y,z],[x1,y+.55,z],[x1,y+.55,z+.5],[x1,y,z+.5]]), fill: "#302c28" }, g);
+    }
+    for (let z = 1; z < h; z += 1) el("polyline", { points: pts([[x0,y1,z],[x1,y1,z],[x1,y0,z]]), fill: "none", stroke: G1, "stroke-width": .5 }, g);
+    face([[x0,y0,h],[x1,y0,h],[x1,y1,h],[x0,y1,h]], "#3e3a35");
+    el("polygon", { points: pts([[x0+.3,y0+.3,h],[x1-.3,y0+.3,h],[x1-.3,y1-.3,h],[x0+.3,y1-.3,h]]), fill: "none", stroke: G3, "stroke-width": .5 }, g);
+    if (h > 4.5) {
+      const ux0 = x0 + 1, ux1 = x0 + 2.6, uy0 = y0 + 1, uy1 = y0 + 2.2, uh = h + .6;
+      el("polygon", { points: pts([[ux0,uy1,h],[ux1,uy1,h],[ux1,uy1,uh],[ux0,uy1,uh]]), fill: "#2f2b27", stroke: "#8a847b", "stroke-width": .6 }, g);
+      el("polygon", { points: pts([[ux1,uy0,h],[ux1,uy1,h],[ux1,uy1,uh],[ux1,uy0,uh]]), fill: "#24211e", stroke: "#8a847b", "stroke-width": .6 }, g);
+      el("polygon", { points: pts([[ux0,uy0,uh],[ux1,uy0,uh],[ux1,uy1,uh],[ux0,uy1,uh]]), fill: "#4a4642", stroke: "#8a847b", "stroke-width": .6 }, g);
+    }
+    const [tx, ty] = P(x0 + .7, y1 - .8, h);
+    const t = el("text", { transform: `matrix(${C30},0.5,${-C30},0.5,${tx},${ty})`, fill: G4, "font-family": MONO, "font-size": 10.5, "letter-spacing": ".1em" }, g);
+    t.textContent = b.n;
+  }
+  for (const b of B) add((b.x0 + b.x1) / 2 + (b.y0 + b.y1) / 2, () => building(b));
 
-  label(10.4, 6.0, 2.4, "CP-2 · BAG ON PATH · 7:27 PM", INK, 14);
-  label(8.0, 6.3, 2.4, "CP-1 · ENTRANCE STEP · 7:29 PM", REDT, -14, "end");
-  label(11.2, 14.6, 1.6, "7:27 PM · TOO DARK", "#5f5a54", 14);
-  label(13.6, 9.6, 1.6, "FRESH VIEW", INK, 14);
-  const b = svg.getBBox();
-  svg.setAttribute("viewBox", `${b.x - 8} ${b.y - 8} ${b.width + 16} ${b.height + 16}`);
+  // Block E door with its raised entrance step; Block A door
+  add(18.55 + 13.6 + .2, () => {
+    el("polygon", { points: pts([[18.15,13.6,0],[18.95,13.6,0],[18.95,13.6,1.3],[18.15,13.6,1.3]]), fill: INK, stroke: G4, "stroke-width": .8 }, L_obj);
+    el("polygon", { points: pts([[18.05,13.6,.3],[19.05,13.6,.3],[19.05,14.1,.3],[18.05,14.1,.3]]), fill: G1, stroke: REDM, "stroke-width": .8 }, L_obj);
+    el("polygon", { points: pts([[18.05,14.1,0],[19.05,14.1,0],[19.05,14.1,.3],[18.05,14.1,.3]]), fill: "#2f2b27", stroke: REDM, "stroke-width": .8 }, L_obj);
+    el("polygon", { points: pts([[19.05,13.6,0],[19.05,14.1,0],[19.05,14.1,.3],[19.05,13.6,.3]]), fill: "#24211e", stroke: REDM, "stroke-width": .8 }, L_obj);
+  });
+  add(8.5 + 4.5 + .01, () => el("polygon", { points: pts([[8.5,4.05,0],[8.5,4.95,0],[8.5,4.95,1.3],[8.5,4.05,1.3]]), fill: INK, stroke: G4, "stroke-width": .8 }, L_obj));
+
+  function tree(x, y, s = 1) {
+    const [bx, by] = P(x, y), [tx, ty] = P(x, y, 1.5 * s), g = el("g", {}, L_obj);
+    el("ellipse", { cx: bx, cy: by, rx: 7 * s, ry: 3.5 * s, fill: "rgba(0,0,0,.35)" }, g);
+    el("line", { x1: bx, y1: by, x2: tx, y2: ty, stroke: G3, "stroke-width": 1 }, g);
+    for (const [dx, dy, r] of [[-5, -2, 6.5], [5, -3, 6.5], [0, -9, 7.5]])
+      el("circle", { cx: tx + dx * s, cy: ty + dy * s, r: r * s, fill: "#26231f", stroke: G3, "stroke-width": .8 }, g);
+  }
+  for (const [x, y, s] of [[23.4,13.6,1.15],[23.6,11.6,1],[13.4,15.9,.9],[15.2,12.2,.8],[3,9.9,.9],[6.2,10.2,.8],[27.5,19.3,1],[31,20.4,.9],[3.6,19.7,1],[7.3,20.5,.8],[12.4,1.2,.8],[33.2,8.2,.9],[20.4,6.4,.8],[1.2,22.8,.8]])
+    add(x + y, () => tree(x, y, s));
+
+  // bus shelter and stop sign
+  add(8 + 22.9, () => {
+    const x0 = 6.4, x1 = 9.4, y0 = 22.25, y1 = 22.75, h = 1.7, g = el("g", {}, L_obj);
+    el("polygon", { points: pts([[x0,y0,.2],[x1,y0,.2],[x1,y0,h],[x0,y0,h]]), fill: "rgba(239,235,228,.06)", stroke: G3, "stroke-width": .6 }, g);
+    for (const x of [x0, x1]) { const [a, b] = [P(x, y1, 0), P(x, y1, h)]; el("line", { x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: G4, "stroke-width": .9 }, g); }
+    el("polygon", { points: pts([[x0,y0,h],[x1,y0,h],[x1,y1,h],[x0,y1,h]]), fill: G1, stroke: G4, "stroke-width": .8 }, g);
+    const [p1, p2] = [P(10,22.9,0), P(10,22.9,2.4)];
+    el("line", { x1: p1[0], y1: p1[1], x2: p2[0], y2: p2[1], stroke: G4, "stroke-width": 1 }, g);
+    el("rect", { x: p2[0] - 5, y: p2[1] - 5, width: 10, height: 6, fill: PAPER }, g);
+  });
+
+  // fixed camera on a pole
+  const CAM = [5.4, 21.4], CAMZ = 3.2;
+  add(CAM[0] + CAM[1], () => {
+    const g = el("g", {}, L_obj), [a, b] = [P(...CAM, 0), P(...CAM, CAMZ)];
+    el("line", { x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: G4, "stroke-width": 1.2 }, g);
+    el("rect", { x: b[0] - 2, y: b[1] - 4, width: 11, height: 7, fill: PAPER, stroke: INK, "stroke-width": .6, transform: `rotate(28 ${b[0]} ${b[1]})` }, g);
+  });
+  // second robot (wheeled)
+  const R2 = [23.9, 18.3];
+  add(R2[0] + R2[1], () => {
+    const g = el("g", {}, L_obj), [x, y] = R2, x0 = x - .45, x1 = x + .45, y0 = y - .7, y1 = y + .7, h = .7;
+    el("polygon", { points: pts([[x0,y1,.2],[x1,y1,.2],[x1,y1,h],[x0,y1,h]]), fill: G4, stroke: INK, "stroke-width": .6 }, g);
+    el("polygon", { points: pts([[x1,y0,.2],[x1,y1,.2],[x1,y1,h],[x1,y0,h]]), fill: G3, stroke: INK, "stroke-width": .6 }, g);
+    el("polygon", { points: pts([[x0,y0,h],[x1,y0,h],[x1,y1,h],[x0,y1,h]]), fill: PAPER, stroke: INK, "stroke-width": .6 }, g);
+    for (const yy of [y0 + .25, y1 - .25]) { const [cx, cy] = P(x1, yy, .2); el("ellipse", { cx, cy, rx: 2.6, ry: 3.2, fill: INK, stroke: G4, "stroke-width": .6 }, g); }
+    const [m1, m2] = [P(x, y - .3, h), P(x, y - .3, h + .8)];
+    el("line", { x1: m1[0], y1: m1[1], x2: m2[0], y2: m2[1], stroke: PAPER, "stroke-width": 1 }, g);
+    el("circle", { cx: m2[0], cy: m2[1], r: 2, fill: PAPER }, g);
+  });
+  // residents' phones, drawn where they were held
+  const PH = [[20.6, 16.2], [26.4, 21.4]];
+  function phone(x, y) {
+    const g = el("g", {}, L_obj), [a, b] = [P(x, y, 0), P(x, y, 1.9)];
+    el("line", { x1: a[0], y1: a[1], x2: b[0], y2: b[1] + 7, stroke: G3, "stroke-width": .7, "stroke-dasharray": "1.5 2" }, g);
+    el("ellipse", { cx: a[0], cy: a[1], rx: 2.5, ry: 1.3, fill: G3 }, g);
+    el("rect", { x: b[0] - 4, y: b[1] - 7, width: 8, height: 14, rx: 1.6, fill: INK, stroke: PAPER, "stroke-width": 1 }, g);
+    el("rect", { x: b[0] - 2.3, y: b[1] - 4.8, width: 4.6, height: 8.6, fill: G4 }, g);
+  }
+  for (const [x, y] of PH) add(x + y, () => phone(x, y));
+
+  // BenBen: Unitree Go2 model render, graded to the palette
+  const BB = [10.75, 10.3];
+  add(BB[0] + BB[1], () => {
+    const [bx, by] = P(...BB);
+    el("ellipse", { cx: bx - 2, cy: by + 1, rx: 25, ry: 9, fill: "rgba(0,0,0,.5)" }, L_obj);
+    el("image", { href: "assets/twin32-go2.png", x: bx - 39, y: by - 67, width: 76, height: 69.5 }, L_obj);
+  });
+
+  // ---------- checkpoints ----------
+  const CP = {
+    "CP-1": { p: [10.75, 4.5], s: "clear" },
+    "CP-2": { p: [10.75, 13.2], s: "open", sel: true },
+    "CP-3": { p: [22, 13], s: "dark" },
+    "CP-4": { p: [18.55, 14.5], s: "open" },
+    "CP-5": { p: [22, 16.1], s: "clear" },
+    "CP-6": { p: [8.2, 22.9], s: "clear" },
+    "CP-7": { p: [24.5, 23.1], s: "clear" },
+  };
+  cone(...BB, 10.75, 13.2, .3);
+  cone(21.2, 8.9, 22, 13, .33, "dark");
+  cone(...PH[0], 18.55, 14.5, .34);
+  cone(...R2, 22, 16.1, .34);
+  cone(...CAM, 8.2, 22.9, .36);
+  cone(...PH[1], 24.5, 23.1, .38);
+  const HZ = 2.1;
+  for (const [id, c] of Object.entries(CP)) {
+    const [x, y] = c.p, col = c.s === "open" ? RED : c.s === "dark" ? G4 : KHAKI;
+    const [gx, gy] = P(x, y);
+    el("ellipse", { cx: gx, cy: gy, rx: 10, ry: 5, fill: c.s === "dark" ? "url(#hatch)" : "none", stroke: col, "stroke-width": 1.2 }, L_paths);
+    if (c.sel) el("ellipse", { cx: gx, cy: gy, rx: 16, ry: 8, fill: "none", stroke: RED, "stroke-width": .8, "stroke-dasharray": "2 2.5" }, L_paths);
+    add(x + y + .05, () => {
+      const g = el("g", {}, L_obj), [tx, ty] = P(x, y, HZ);
+      el("line", { x1: gx, y1: gy, x2: tx, y2: ty, stroke: col, "stroke-width": 1.2 }, g);
+      if (c.s === "open") el("path", { d: `M${tx} ${ty - 7} L${tx + 7} ${ty} L${tx} ${ty + 7} L${tx - 7} ${ty} Z`, fill: RED, stroke: INK, "stroke-width": .8 }, g);
+      else if (c.s === "dark") el("circle", { cx: tx, cy: ty, r: 6, fill: "url(#hatch)", stroke: G4, "stroke-width": 1.2 }, g);
+      else { el("circle", { cx: tx, cy: ty, r: 6, fill: KHAKI, stroke: INK, "stroke-width": .8 }, g);
+        el("path", { d: `M${tx - 3} ${ty + .2} L${tx - .8} ${ty + 2.4} L${tx + 3.2} ${ty - 2.2}`, fill: "none", stroke: INK, "stroke-width": 1.5 }, g); }
+      if (c.sel) { const r = 12, k = 4;
+        el("path", { d: `M${tx - r} ${ty - r + k}V${ty - r}H${tx - r + k} M${tx + r - k} ${ty - r}H${tx + r}V${ty - r + k} M${tx + r} ${ty + r - k}V${ty + r}H${tx + r - k} M${tx - r + k} ${ty + r}H${tx - r}V${ty + r - k}`, fill: "none", stroke: PAPER, "stroke-width": 1.2 }, g); }
+    });
+  }
+
+  objs.sort((a, b) => a.key - b.key).forEach(o => o.fn());
+
+  // ---------- provenance: source → the observation it produced ----------
+  function prov(from, fz, cp) {
+    const [ax, ay] = P(...from, fz), [bx, by] = P(...CP[cp].p, HZ);
+    el("path", { d: `M${ax} ${ay} Q${(ax + bx) / 2} ${Math.min(ay, by) - 18} ${bx} ${by}`, fill: "none", stroke: G4, "stroke-width": .8, "stroke-dasharray": "1 2.4" }, L_prov);
+    el("circle", { cx: ax, cy: ay, r: 1.6, fill: G4 }, L_prov);
+  }
+  prov(BB, 1.9, "CP-2"); prov(BB, 1.9, "CP-1");
+  prov(PH[0], 1.9, "CP-4"); prov(PH[1], 1.9, "CP-7");
+  prov(R2, 1.5, "CP-5"); prov(CAM, CAMZ, "CP-6");
+
+  // ---------- labels ----------
+  function tag(x, y, z, dx, dy, l1, l2, col, opts = {}) {
+    const [ax, ay] = P(x, y, z), bx = ax + dx, by = ay + dy, g = el("g", {}, L_lab), pad = opts.hatch ? 12 : 7;
+    const lead = el("polyline", { fill: "none", stroke: col === RED ? RED : G4, "stroke-width": .8 }, g);
+    const box = el("rect", { fill: INK, stroke: col === RED ? RED : col === KHAKI ? KHAKI : G3, "stroke-width": .9 }, g);
+    const hb = opts.hatch ? el("rect", { fill: "url(#hatch)" }, g) : null;
+    const t1 = el("text", { fill: col, "font-family": MONO, "font-size": 10, "font-weight": 600, "letter-spacing": ".08em" }, g); t1.textContent = l1;
+    const t2 = el("text", { fill: G4, "font-family": MONO, "font-size": 9.5, "letter-spacing": ".07em" }, g); t2.textContent = l2;
+    const w = Math.max(t1.getBBox().width, t2.getBBox().width) + pad + 7, hgt = 30;
+    const left = opts.anchor === "end" ? bx - w : bx, top = by - hgt / 2;
+    for (const [e, a] of [[box, { x: left, y: top, width: w, height: hgt }], [t1, { x: left + pad, y: top + 12.5 }], [t2, { x: left + pad, y: top + 24.5 }]]) for (const k in a) e.setAttribute(k, a[k]);
+    if (hb) for (const [k, v] of Object.entries({ x: left, y: top, width: 6, height: hgt })) hb.setAttribute(k, v);
+    const ex = opts.anchor === "end" ? left + w : left;
+    lead.setAttribute("points", `${ax},${ay} ${ax + dx * .5},${by} ${ex},${by}`);
+  }
+  tag(10.75, 13.2, HZ, -44, 18, "CP-2 · OPEN", "BAG ON PATH", RED, { anchor: "end" });
+  tag(18.55, 14.5, HZ, -36, -14, "CP-4 · OPEN", "ENTRANCE STEP", RED, { anchor: "end" });
+  tag(22, 13, HZ, 44, -36, "CP-3 · TOO DARK", "WAITING FOR A USABLE VIEW", PAPER, { hatch: true });
+  tag(10.75, 4.5, HZ, 34, -40, "CP-1 · CLEARED", "BLOCK A DOOR", KHAKI);
+  tag(22, 16.1, HZ, 44, 40, "CP-5 · CLEARED", "EAST PATH", KHAKI);
+  tag(8.2, 22.9, HZ, 8, 62, "CP-6 · CLEARED", "BUS STOP KERB", KHAKI);
+  tag(24.5, 23.1, HZ, 40, 26, "CP-7 · CLEARED", "PICKUP KERB RAMP", KHAKI);
+
+  function small(x, y, z, dx, dy, s, col = G4, anchor = "start") {
+    const [ax, ay] = P(x, y, z), t = el("text", { x: ax + dx, y: ay + dy, fill: col, "font-family": MONO, "font-size": 9.5, "letter-spacing": ".08em", "text-anchor": anchor }, L_lab);
+    t.textContent = s;
+    if (col === PAPER || col === G4) { const b = t.getBBox(); const r = el("rect", { x: b.x - 3, y: b.y - 1, width: b.width + 6, height: b.height + 2, fill: INK, opacity: .72 }, L_lab); L_lab.insertBefore(r, t); }
+    return t;
+  }
+  small(...BB, 0, -44, -50, "BENBEN", PAPER, "end");
+  small(...BB, 0, -44, -39, "GO2 · FRONT CAM", G4, "end");
+  small(...R2, 1.5, -12, 8, "ROBOT 2", G4, "end");
+  small(...CAM, CAMZ, 10, -10, "FIXED CAMERA");
+  small(...PH[0], 1.9, 9, -8, "PHONE");
+  small(...PH[1], 1.9, 9, -8, "PHONE");
+  small(8, 22.6, 1.7, -8, -14, "BUS STOP", PAPER, "end");
+  small(24.5, 24.6, 0, 8, 26, "RIDESHARE PICKUP", PAPER);
+  small(28.4, 7.2, 0, 14, 16, "STEPS · NO RAMP");
+  small(22, 13, HZ, 47, -58, "PLANNER · NEXT LOOK → CP-3", PAPER);
+  function ground(x, y, s) {
+    const [tx, ty] = P(x, y);
+    const t = el("text", { transform: `matrix(${C30},0.5,${-C30},0.5,${tx},${ty})`, fill: G3, "font-family": MONO, "font-size": 9.5, "letter-spacing": ".14em" }, L_net); t.textContent = s;
+  }
+  ground(28, 25.4, "ESTATE ROAD");
+
+  // ---------- fixed overlays ----------
+  const ov = el("g", {}, svg);
+  ov.innerHTML = `
+    <g transform="translate(0 500)"><rect x="14" y="14" width="232" height="70" fill="#141312" stroke="#77726b" stroke-width=".9"/>
+    <rect x="14" y="14" width="3" height="70" fill="#c7372a"/>
+    <text x="26" y="31" fill="#a39d94" font-family="${MONO}" font-size="9.5" letter-spacing=".09em">ROUTE · BLOCK A → PICKUP</text>
+    <text x="26" y="50" fill="#e0786b" font-family="${MONO}" font-size="12.5" font-weight="700" letter-spacing=".08em">BLOCKED AT CP-2</text>
+    <text x="26" y="70" fill="#e9e4db" font-family="${MONO}" font-size="9.5" letter-spacing=".09em">ALT · EAST PATH · STEP-FREE</text></g>
+    <g transform="translate(650 40)" font-family="${MONO}" font-size="9.5" letter-spacing=".08em">
+      <circle r="16" fill="none" stroke="#4a4642"/>
+      <path d="M0 -13 L4 2 L0 -1 L-4 2Z" fill="#e9e4db" transform="rotate(-60)"/>
+      <text x="-22" y="34" fill="#77726b">ISO · 30°</text>
+    </g>`;
+
+  // ---------- time scrubber: visits as ticks ----------
+  const sc = document.getElementById("scrub");
+  const x0 = 160, x1 = 1090, X = f => x0 + (x1 - x0) * f;
+  let h = "";
+  ["CP-2 STATE", "BENBEN", "ROBOT 2", "PHONES", "CAMERA"].forEach((n, i) => { const y = 29 + i * 12;
+    h += `<text x="14" y="${y + 3.5}" fill="${i ? "#77726b" : "#e9e4db"}" font-family="${MONO}" font-size="9" letter-spacing=".09em">${n}</text>`;
+    h += `<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="#e9e4db" stroke-opacity=".08"/>`; });
+  ["MON","TUE","WED","THU","FRI","SAT","SUN"].forEach((d, i) => { const x = X(i / 7);
+    h += `<line x1="${x}" y1="18" x2="${x}" y2="82" stroke="#e9e4db" stroke-opacity=".1"/><text x="${x + 4}" y="15" fill="#77726b" font-family="${MONO}" font-size="9" letter-spacing=".09em">${d}</text>`; });
+  h += `<rect x="${X(0)}" y="25" width="${X(.58) - X(0)}" height="8" fill="#b3a37f"/>`;
+  h += `<rect x="${X(.58)}" y="25" width="${X(.93) - X(.58)}" height="8" fill="#c7372a"/>`;
+  h += `<rect x="${X(.93)}" y="25" width="${X(1) - X(.93)}" height="8" fill="none" stroke="#77726b" stroke-dasharray="2 2"/>`;
+  const tick = (f, lane, kind) => { const y = 29 + lane * 12, x = X(f);
+    if (kind === "dark") return `<rect x="${x - 2.5}" y="${y - 4.5}" width="5" height="9" fill="url(#hatchS)" stroke="#a39d94" stroke-width=".7"/>`;
+    return `<rect x="${x - 1}" y="${y - 4.5}" width="2" height="9" fill="${kind === "hi" ? "#efebe4" : "#a39d94"}"/>`; };
+  for (let d = 0; d < 7; d++) for (const o of [.03, .085, .12]) { const f = d / 7 + o; if (f < .9) h += tick(f, 1, (o === .12 && d % 2) || Math.abs(f - .77) < .03 ? "dark" : ""); }
+  for (const f of [.05, .21, .33, .47, .62, .78, .9]) h += tick(f, 2);
+  for (const f of [.14, .4, .58, .71, .86]) h += tick(f, 3);
+  for (let f = .02; f < .93; f += .048) h += tick(f, 4);
+  h += tick(.905, 1, "hi");
+  h += `<line x1="${X(.58)}" y1="33" x2="${X(.58)}" y2="83" stroke="#e0786b" stroke-width=".8"/><text x="${X(.58) - 4}" y="92" fill="#a39d94" text-anchor="end" font-family="${MONO}" font-size="9" letter-spacing=".08em">PHONE REPORT → OPEN</text>`;
+  h += `<line x1="${X(.77)}" y1="45" x2="${X(.77)}" y2="83" stroke="#a39d94" stroke-width=".7" stroke-dasharray="1 2"/><text x="${X(.77) - 4}" y="92" fill="#a39d94" text-anchor="end" font-family="${MONO}" font-size="9" letter-spacing=".08em">TOO DARK · IGNORED</text>`;
+  h += `<line x1="${X(.93)}" y1="8" x2="${X(.93)}" y2="90" stroke="#efebe4" stroke-width="1.4"/><path d="M${X(.93) - 5} 6 h10 l-5 6z" fill="#efebe4"/>`;
+  h += `<text x="${X(.93) + 6}" y="92" fill="#efebe4" font-family="${MONO}" font-size="9" letter-spacing=".08em">NOW</text>`;
+  sc.innerHTML = `<defs><pattern id="hatchS" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3" height="3" fill="#1e1c1a"/><line x1="0" y1="0" x2="0" y2="3" stroke="#a39d94" stroke-width="1.2"/></pattern></defs>` + h;
 })();
 </script>
 </body>
