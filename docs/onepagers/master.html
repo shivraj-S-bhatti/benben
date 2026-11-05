@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BenBen Master Graphic</title>
+<meta name="viewport" content="width=2400">
+<style>
+@font-face{font-family:"Inter";src:url("../../app/static/fonts/Inter-Latin.woff2") format("woff2");font-weight:100 900;}
+:root{
+  --ink:#141312; --ink2:#1e1c1a; --ink3:#2a2724;
+  --g1:#4a4642; --g2:#66615b; --g3:#a39d94; --hair:rgba(20,19,18,.22);
+  --paper:#ebe6dd; --card:#f5f2ec; --card2:#efebe4; --well:#ddd6ca;
+  --red:#c7372a; --red2:#8f2a20; --red3:#e0786b; --khaki:#b3a37f;
+  --grot:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"SF Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:2400px;height:1500px;overflow:hidden;background:var(--paper)}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;position:relative;
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(rgba(20,19,18,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(20,19,18,.045) 1px,transparent 1px);
+  background-size:24px 24px;background-position:-1px -1px;}
+body::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .42  0 0 0 0 .38  0 0 0 .35 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");}
+.abs{position:absolute}
+.mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em}
+
+/* header */
+.eyebrow{left:64px;top:52px;font-size:15px;color:var(--g1)}
+h1{position:absolute;left:60px;top:78px;font-family:var(--grot);font-weight:700;font-size:106px;line-height:1;letter-spacing:-.035em;color:var(--ink)}
+.sub{left:1452px;top:104px;width:884px;font-size:25px;line-height:1.42;color:var(--ink3)}
+.lane{font-size:13px;color:var(--g1)}
+.lane b{color:var(--ink);font-weight:600}
+
+/* cards */
+.card{position:absolute;background:var(--card);border:1px solid var(--hair);border-radius:2px;padding:20px 22px;display:flex;flex-direction:column}
+.card.dark{background:var(--ink2);border-color:var(--ink);color:#f2eee7}
+.k{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2)}
+.dark .k{color:#b5aea4}
+.t{font-family:var(--grot);font-weight:700;font-size:31px;letter-spacing:-.02em;line-height:1.05;margin-top:8px}
+.t.sm{font-size:25px}
+.s{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);margin-top:7px;line-height:1.5}
+.dark .s{color:#b5aea4}
+.photo{position:relative;overflow:hidden;background:#000;border:1px solid var(--ink)}
+.photo img{display:block;width:100%;height:100%;object-fit:cover}
+.cap{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);margin-top:8px}
+.rule{height:1px;background:var(--hair);margin:16px 0}
+.dark .rule{background:rgba(239,235,228,.18)}
+.icon{margin-top:auto;height:112px;background:var(--card2);border:1px solid rgba(20,19,18,.12);display:grid;place-items:center}
+.icon svg{display:block}
+.chip{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border:1px solid var(--hair);border-radius:2px;white-space:nowrap}
+.chip i{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+.ask{margin-top:18px;background:var(--card2);border:1px solid rgba(20,19,18,.14);padding:14px 14px 16px}
+.ask p{font-family:var(--grot);font-weight:700;font-size:28px;line-height:1.1;letter-spacing:-.02em;margin-top:8px}
+.cite{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:#b5aea4;margin-top:10px}
+/* question */
+.q{font-family:var(--grot);font-weight:700;font-size:40px;line-height:1.08;letter-spacing:-.025em;margin-top:22px;color:var(--ink)}
+
+/* robot */
+.robot{position:relative;height:300px;background:var(--well);margin-top:14px;border:1px solid rgba(20,19,18,.12);overflow:hidden}
+.robot img{position:absolute;left:68px;top:-6px;width:330px;filter:sepia(.28) saturate(.75) contrast(1.06) brightness(.96) drop-shadow(0 14px 14px rgba(40,30,20,.28))}
+.robot .fan{position:absolute;left:0;top:0}
+
+/* finding */
+.sam{position:absolute;border:3px solid var(--red);background:rgba(199,55,42,.12)}
+.sam span{position:absolute;left:-3px;top:-27px;background:var(--red);color:#fff;font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.04em;padding:4px 7px;white-space:nowrap}
+.quote{font-size:22px;line-height:1.4;color:#f5f2ec;margin-top:14px}
+.dark .chip{border-color:rgba(239,235,228,.3);color:#efebe4}
+.chip.flag{background:var(--khaki);border-color:var(--khaki);color:var(--ink);font-weight:600}
+
+/* twin */
+.twinwrap{display:grid;grid-template-columns:200px 1fr;gap:16px;margin-top:12px;flex:1;min-height:0}
+.lidar{background:#fafafa;border:1px solid rgba(20,19,18,.12);height:168px;overflow:hidden}
+.lidar img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) sepia(.25)}
+
+/* footer */
+.foot{left:64px;right:64px;top:1440px;display:flex;justify-content:space-between;font-size:13px;color:var(--g1)}
+.foot b{color:var(--ink);font-weight:600}
+svg.wires{position:absolute;left:0;top:0;pointer-events:none}
+.wlabel{position:absolute;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--paper);padding:3px 7px;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<div class="abs mono eyebrow">BenBen · Architecture</div>
+<h1>BenBen keeps the map true.</h1>
+<p class="abs sub">Routing apps trust their map. BenBen patrols it, and nothing counts as clear until it is seen clear.</p>
+
+<div class="abs mono lane" style="left:64px;top:222px"><b>One run</b> · left to right</div>
+<div class="abs mono lane" style="left:1420px;top:892px"><b>Every run</b> · memory · right to left</div>
+
+<!-- ============ TOP LANE: ONE RUN ============ -->
+<!-- 1 question -->
+<div class="card" style="left:64px;top:250px;width:450px;height:600px">
+  <div class="k"><span>The question</span></div>
+  <div class="photo" style="margin-top:14px;height:250px"><img src="assets/m-frame-010.jpg" alt="Night camera frame: concrete steps with pumpkins up to a door, no ramp"></div>
+  <div class="cap"><span>BenBen camera</span></div>
+  <p class="q">Can a wheelchair user get from home to the Uber pickup tonight?</p>
+  <div style="margin-top:auto;display:flex;gap:8px"><span class="chip">Estate at night</span><span class="chip" style="border-color:var(--ink);color:var(--ink)">Step-free route unknown</span></div>
+</div>
+
+<!-- 2 reasoner + action model -->
+<div class="card" style="left:566px;top:250px;width:250px;height:600px">
+  <div class="k"><span>Reasoner</span></div>
+  <div class="t sm">Plans the patrol</div>
+  <div class="s">replans after<br>every look</div>
+  <div class="icon" style="margin-top:16px;height:118px">
+    <svg width="200" height="84" viewBox="0 0 200 84" fill="none" stroke="#2a2724" stroke-width="1.6" font-family="Menlo,monospace" font-size="11">
+      <path d="M10 70 L56 30 L100 62 L148 18 L190 50" stroke-dasharray="4 4"/>
+      <circle cx="10" cy="70" r="4" fill="#2a2724"/>
+      <g fill="#f5f2ec"><circle cx="56" cy="30" r="10"/><circle cx="100" cy="62" r="10"/><circle cx="148" cy="18" r="10"/><circle cx="190" cy="50" r="8"/></g>
+      <g fill="#2a2724" stroke="none" text-anchor="middle"><text x="56" y="34">1</text><text x="100" y="66">2</text><text x="148" y="22">3</text><text x="190" y="54">4</text></g>
+    </svg>
+  </div>
+  <div style="text-align:center;margin:10px 0 6px"><svg width="14" height="22" viewBox="0 0 14 22"><path d="M7 1V19M2 14L7 20L12 14" fill="none" stroke="#2a2724" stroke-width="1.6"/></svg></div>
+  <div class="k"><span>Action model</span></div>
+  <div class="t sm">Walks each leg</div>
+  <div class="s">behind a<br>motion guard</div>
+  <div class="icon" style="margin-top:14px;height:118px">
+    <svg width="210" height="90" viewBox="0 0 210 90" fill="none" stroke="#2a2724" stroke-width="1.6">
+      <path d="M12 68 C46 68 56 28 94 34 S138 62 156 48" stroke-dasharray="5 4"/>
+      <circle cx="12" cy="68" r="4" fill="#2a2724"/>
+      <path d="M180 18 L200 25 V44 C200 58 190 66 180 70 C170 66 160 58 160 44 V25 Z" fill="#f5f2ec"/>
+      <path d="M172 44 L178 50 L189 37" stroke-width="2"/>
+    </svg>
+  </div>
+</div>
+
+<!-- 3 patrol + sense -->
+<div class="card" style="left:868px;top:250px;width:500px;height:600px">
+  <div class="k"><span>Unitree Go2</span></div>
+  <div class="t">BenBen patrols</div>
+  <div class="s">the reasoner plans live · the guard vets each step</div>
+  <div class="robot">
+    <svg class="fan" width="456" height="300" viewBox="0 0 456 300">
+      <path d="M118 120 L-10 40 L-10 250 Z" fill="rgba(20,19,18,.07)"/>
+      <path d="M118 120 L-10 40 M118 120 L-10 250" stroke="rgba(20,19,18,.35)" stroke-width="1" stroke-dasharray="2 4"/>
+      <g fill="none" stroke="rgba(20,19,18,.35)" stroke-width="1" stroke-dasharray="1.5 4" stroke-linecap="round"><path d="M70 92 Q52 128 70 160"/><path d="M36 72 Q10 130 36 200"/></g>
+    </svg>
+    <img src="assets/go2-render.png" alt="Unitree Go2 robot dog">
+  </div>
+  <div class="k" style="margin-top:16px"><span>Sense</span><span>LiDAR → camera</span></div>
+  <div class="t sm" style="margin-top:6px">Geometry decides when to look</div>
+  <div class="icon" style="margin-top:12px;height:92px">
+    <svg width="440" height="80" viewBox="0 0 440 80" fill="none" stroke="#2a2724" stroke-width="1.6" font-family="Menlo,monospace" font-size="10.5">
+      <path d="M10 58 H300" stroke="#a39d94" stroke-width="1"/>
+      <g fill="#2a2724" stroke="none" id="pts"></g>
+      <path d="M192 22 V16 H248 V22" stroke-width="1.2"/>
+      <path d="M252 30 H320 M314 25 L321 30 L314 35"/>
+      <rect x="332" y="16" width="44" height="30" rx="2" fill="#f5f2ec"/><path d="M342 16 V11 H356 V16"/><circle cx="354" cy="31" r="8"/><circle cx="354" cy="31" r="3" fill="#2a2724"/>
+      <g fill="#4a4642" stroke="none" font-size="11" text-anchor="middle"><text x="100" y="76">SAME SHAPE · WALK ON</text><text x="220" y="76">NEW SHAPE</text><text x="354" y="66">LOOK</text></g>
+    </svg>
+  </div>
+</div>
+
+<!-- 4 finding (focal) -->
+<div class="card dark" style="left:1420px;top:250px;width:600px;height:600px">
+  <div class="k"><span>SAM 3.1 + Muse Spark</span></div>
+  <div class="t" style="color:#f5f2ec">Perceive + decide</div>
+  <div class="photo" style="margin-top:14px;height:300px;border-color:#000">
+    <img src="assets/m-frame-048.jpg" alt="Night frame: a large white paper bag on the footpath">
+    <div class="sam" style="left:15.234%;top:40.417%;width:32.656%;height:59.444%"><span>SAM 3.1 · paper bag</span></div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:22px">
+    <span class="chip flag">Flag for service</span>
+  </div>
+  <p class="quote" style="font-size:25px;margin-top:20px">“A large white paper bag is sitting on the path in the torch light.”</p>
+  <div class="cite">Muse Spark</div>
+</div>
+
+<!-- 5 review -->
+<div class="card" style="left:2072px;top:250px;width:264px;height:600px">
+  <div class="k"><span>Review</span></div>
+  <div class="t">Asks one question</div>
+  <div class="s">a person answers</div>
+  <div class="ask">
+    <div class="k"><span>BenBen asks</span></div>
+    <p>Is the bag on the path or beside&nbsp;it?</p>
+    <div style="display:flex;gap:6px;margin-top:14px"><span class="chip" style="border-color:var(--ink);color:var(--ink)">On the path</span><span class="chip">Beside it</span></div>
+  </div>
+  <div class="k" style="margin-top:30px"><span>Actions</span></div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+    <span class="chip" style="align-self:flex-start"><i style="background:var(--ink);border-radius:0"></i>Report an issue</span>
+    <span class="chip" style="align-self:flex-start"><i style="background:var(--ink)"></i>Reroute</span>
+    <span class="chip" style="align-self:flex-start"><i style="background:var(--khaki)"></i>Flag for service</span>
+    <span class="chip" style="align-self:flex-start"><i style="border:1.5px solid var(--g3)"></i>Needs a human</span>
+  </div>
+</div>
+
+<!-- ============ BOTTOM LANE: MEMORY ============ -->
+<!-- archive -->
+<div class="card" style="left:2072px;top:930px;width:264px;height:370px">
+  <div class="k"><span>Run archive</span></div>
+  <div class="t">Keeps every run</div>
+  <div class="s">frames · clouds · poses</div>
+  <div class="icon" style="height:150px">
+    <svg width="210" height="100" viewBox="0 0 210 100" fill="none" stroke="#2a2724" stroke-width="1.6" font-family="Menlo,monospace" font-size="11">
+      <g fill="#f5f2ec"><path d="M12 14 H50 L62 26 V86 H12 Z"/><path d="M80 14 H118 L130 26 V86 H80 Z"/><path d="M148 14 H186 L198 26 V86 H148 Z"/></g>
+      <path d="M50 14 V26 H62 M118 14 V26 H130 M186 14 V26 H198" stroke-width="1.2"/>
+      <path d="M29 42 L43 50 L29 58 Z" fill="#2a2724"/>
+      <g fill="#2a2724" stroke="none"><circle cx="96" cy="44" r="2"/><circle cx="104" cy="50" r="2"/><circle cx="112" cy="46" r="2"/><circle cx="100" cy="56" r="2"/><circle cx="110" cy="58" r="2"/></g>
+      <path d="M160 42 H186 M160 50 H184 M160 58 H182" stroke-width="1.2"/>
+      <g fill="#2a2724" stroke="none" text-anchor="middle"><text x="37" y="78">mp4</text><text x="105" y="78">npy</text><text x="173" y="78">jsonl</text></g>
+    </svg>
+  </div>
+</div>
+
+<!-- twin -->
+<div class="card" style="left:1420px;top:930px;width:600px;height:370px">
+  <div class="k"><span>Virtual twin</span></div>
+  <div class="t">Rebuilds the place</div>
+  <div class="twinwrap">
+    <div>
+      <div class="lidar"><img src="assets/m-lidar-iso.jpg" alt="LiDAR voxel map of the Nov 4 route"></div>
+      <div class="cap" style="margin-top:7px"><span>LiDAR map</span></div>
+      <div style="font-size:16px;line-height:1.4;color:var(--ink3);margin-top:16px"><b style="color:var(--ink)">Bag stays open.</b> Dark views can't close it.</div>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <svg id="twin" viewBox="0 -4 482 330" width="350" height="240" style="margin-top:4px"></svg>
+      <div class="cap" style="margin-top:0;justify-content:flex-end"><span>schematic</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- place memory -->
+<div class="card" style="left:1081px;top:930px;width:287px;height:370px">
+  <div class="k"><span>Place memory</span></div>
+  <div class="t">Remembers each place</div>
+  <div class="s">issue history<br>old vs new evidence</div>
+  <div class="icon" style="height:130px">
+    <svg width="240" height="86" viewBox="0 0 240 86" fill="none" stroke="#2a2724" stroke-width="1.6" font-family="Menlo,monospace" font-size="10.5">
+      <rect x="8" y="12" width="52" height="46" fill="#f5f2ec"/><path d="M20 48 L48 22"/>
+      <rect x="92" y="12" width="52" height="46" fill="#f5f2ec"/><rect x="108" y="25" width="20" height="20" fill="#2a2724"/>
+      <rect x="176" y="12" width="52" height="46" fill="#f5f2ec"/><path d="M188 48 L216 22"/><path d="M196 36 L201 41 L210 30" stroke-width="2"/>
+      <path d="M64 35 H86 M81 30 L87 35 L81 40 M148 35 H170 M165 30 L171 35 L165 40"/>
+      <g fill="#4a4642" stroke="none" text-anchor="middle"><text x="34" y="78">CLEAR</text><text x="118" y="78">BLOCKED</text><text x="202" y="78">CLEARED</text></g>
+    </svg>
+  </div>
+</div>
+
+<!-- world map -->
+<div class="card" style="left:742px;top:930px;width:287px;height:370px">
+  <div class="k"><span>World map</span></div>
+  <div class="t">Updates the map</div>
+  <div class="s">twin · routes<br>issue states</div>
+  <div class="icon" style="height:130px">
+    <svg width="200" height="100" viewBox="0 0 200 100" fill="none" stroke="#2a2724" stroke-width="1.6">
+      <path d="M100 62 L176 76 L100 92 L24 76 Z" fill="#f5f2ec"/>
+      <path d="M100 38 L176 52 L100 68 L24 52 Z" fill="#f5f2ec"/>
+      <path d="M100 14 L176 28 L100 44 L24 28 Z" fill="#f5f2ec"/>
+      <path d="M52 30 Q80 22 98 32 T150 26" stroke-dasharray="3 3"/>
+      <circle cx="78" cy="53" r="3.5" fill="#2a2724"/><circle cx="124" cy="50" r="3.5" fill="#2a2724"/>
+    </svg>
+  </div>
+</div>
+
+<!-- replay -->
+<div class="card" style="left:403px;top:930px;width:287px;height:370px">
+  <div class="k"><span>Replay evals</span></div>
+  <div class="t">Grades every replay</div>
+  <div class="s">missed change · false clear<br>zero unsafe motion</div>
+  <div class="icon" style="height:130px">
+    <svg width="230" height="80" viewBox="0 0 230 80" fill="none" stroke="#2a2724" stroke-width="1.6" font-family="Menlo,monospace" font-size="10.5">
+      <path d="M12 30 H218" stroke="#a39d94" stroke-width="3"/><path d="M12 30 H138" stroke-width="3"/>
+      <circle cx="138" cy="30" r="8" fill="#f5f2ec"/>
+      <g stroke-width="1.4"><path d="M18 46 V62 M30 46 V58 M42 46 V62 M54 46 V58 M66 46 V62 M78 46 V58 M90 46 V62 M102 46 V58 M114 46 V62 M126 46 V58"/></g>
+      <g stroke="#a39d94" stroke-width="1.4"><path d="M150 46 V62 M162 46 V58 M174 46 V62 M186 46 V58 M198 46 V62 M210 46 V58"/></g>
+      <g fill="#4a4642" stroke="none"><text x="12" y="16">0:00</text><text x="134" y="14">t</text><text x="188" y="16">4:00</text></g>
+    </svg>
+  </div>
+</div>
+
+<!-- policy -->
+<div class="card" style="left:64px;top:930px;width:287px;height:370px">
+  <div class="k"><span>Navigation policy</span></div>
+  <div class="t">Trains the action model</div>
+  <div class="s">in replay + sim</div>
+  <div class="icon" style="height:130px">
+    <svg width="220" height="90" viewBox="0 0 220 90" fill="none" stroke="#2a2724" stroke-width="1.6">
+      <path d="M14 66 C50 66 60 24 100 30 S150 62 170 46" stroke-dasharray="5 4"/>
+      <circle cx="14" cy="66" r="4" fill="#2a2724"/>
+      <path d="M186 18 L206 25 V44 C206 58 196 66 186 70 C176 66 166 58 166 44 V25 Z" fill="#f5f2ec"/>
+      <path d="M178 44 L184 50 L195 37" stroke-width="2"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ============ WIRES ============ -->
+<svg class="wires" width="2400" height="1500" viewBox="0 0 2400 1500">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9 Z" fill="#2a2724"/></marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M1 1 L9 5 L1 9 Z" fill="#c7372a"/></marker>
+  </defs>
+  <g stroke="#2a2724" stroke-width="2" fill="none" marker-end="url(#a)">
+    <!-- online run -->
+    <path d="M516 550 H562"/><path d="M818 550 H864"/><path d="M1370 550 H1416"/><path d="M2022 550 H2068"/>
+    <!-- every step -->
+    <path d="M2204 852 V926"/>
+    <!-- memory, right to left -->
+    <path d="M2070 1115 H2024"/><path d="M1418 1115 H1372"/><path d="M1079 1115 H1033"/><path d="M740 1115 H694"/><path d="M401 1115 H355"/>
+    <!-- features: world map -> route planner -->
+    <path d="M885 928 V904 Q885 896 877 896 H756 Q748 896 748 888 V854"/>
+    <!-- promote only if better: policy -> route planner -->
+    <path d="M207 928 V888 Q207 880 215 880 H630 Q638 880 638 872 V854"/>
+  </g>
+  <!-- revisit until verified (red loop): twin -> back to the question -->
+  <path d="M1720 1302 V1352 Q1720 1362 1710 1362 H44 Q34 1362 34 1352 V560 Q34 550 44 550 H60" stroke="#c7372a" stroke-width="2.6" fill="none" marker-end="url(#ar)"/>
+</svg>
+<div class="wlabel" style="left:2214px;top:878px">every step</div>
+<div class="wlabel" style="left:250px;top:866px">promote only if better</div>
+<div class="wlabel" style="left:766px;top:882px;background:transparent;padding:0;top:868px">features</div>
+<div class="wlabel" style="left:740px;top:1347px;background:var(--red);color:#fff;font-weight:600;font-size:13.5px;padding:6px 14px">revisit until verified</div>
+
+<div class="abs foot mono"><span>Meta models · <b>Muse Spark</b> · <b>SAM 3.1</b> · <b>MapAnything</b></span><span><b>github.com/shivraj-S-bhatti/benben</b></span></div>
+
+<script>
+/* LiDAR returns for the sense strip: flat ground, then a new shape */
+(function(){
+  const g=document.getElementById('pts');let o='';
+  for(let x=12;x<300;x+=8){const bump=x>=196&&x<=244;const n=bump?[2,3,4,4,4,3,2][(x-196)/8|0]:1;
+    for(let i=0;i<n;i++){const y=bump?50-i*9:56+((x*13)%5)-2;o+=`<circle cx="${x}" cy="${y}" r="${bump?2.2:1.6}"/>`;}}
+  g.innerHTML=o;
+})();
+/* isometric twin schematic, ink on paper (ported from hero.html) */
+(function(){
+  const svg=document.getElementById('twin');
+  const k=15,ox=208,oy=56;
+  const P=(x,y,z=0)=>[ox+(x-y)*k*.866, oy+(x+y)*k*.5-z*k];
+  const pts=a=>a.map(p=>P(...p).map(v=>v.toFixed(1)).join(',')).join(' ');
+  let out='';
+  const L='#2a2724';
+  const poly=(a,fill,stroke=L,w=1.1,extra='')=>out+=`<polygon points="${pts(a)}" fill="${fill}" stroke="${stroke}" stroke-width="${w}" stroke-linejoin="round" ${extra}/>`;
+  const line=(a,stroke=L,w=1.1,extra='')=>out+=`<polyline points="${pts(a)}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" ${extra}/>`;
+  poly([[0,0],[20,0],[20,14],[0,14]],'#efebe4','rgba(20,19,18,.35)',1);
+  for(let i=1;i<20;i++)for(let j=1;j<14;j++){const [a,b]=P(i,j);out+=`<circle cx="${a}" cy="${b}" r=".7" fill="rgba(20,19,18,.25)"/>`;}
+  poly([[8.2,0],[11.6,0],[11.6,14],[8.2,14]],'#e4ded3','rgba(20,19,18,.5)',1);
+  poly([[3,6],[5.2,6],[5.2,8.2],[3,8.2]],'#e4ded3','rgba(20,19,18,.45)',1);
+  poly([[5.2,7],[8.2,7],[8.2,8.2],[5.2,8.2]],'#e4ded3','rgba(20,19,18,.45)',1);
+  for(let i=0;i<3;i++)line([[3,6+i*.55,.35*(3-i)],[5.2,6+i*.55,.35*(3-i)]],L,1.3);
+  line([[8.2,1,1],[8.2,5,1]],L,1.1);
+  for(let y=1;y<=5;y+=.8)line([[8.2,y,0],[8.2,y,1]],'rgba(20,19,18,.55)',.8);
+  const box=(x0,x1,y0,y1,h,name)=>{
+    poly([[x1,y0,0],[x1,y1,0],[x1,y1,h],[x1,y0,h]],'#ddd6ca');
+    poly([[x0,y1,0],[x1,y1,0],[x1,y1,h],[x0,y1,h]],'#cfc7b9');
+    poly([[x0,y0,h],[x1,y0,h],[x1,y1,h],[x0,y1,h]],'#f5f2ec');
+    for(let z=1;z<h-.6;z+=1.2)for(let x=x0+.7;x<x1-.6;x+=1.3)line([[x,y1,z],[x+.6,y1,z],[x+.6,y1,z+.6],[x,y1,z+.6],[x,y1,z]],'rgba(20,19,18,.45)',.7);
+    for(let z=1;z<h-.6;z+=1.2)for(let y=y0+.7;y<y1-.6;y+=1.3)line([[x1,y,z],[x1,y+.6,z],[x1,y+.6,z+.6],[x1,y,z+.6],[x1,y,z]],'rgba(20,19,18,.35)',.7);
+    const [a,b]=P((x0+x1)/2,(y0+y1)/2,h);
+    out+=`<text x="${a}" y="${b+3}" text-anchor="middle" font-family="Menlo,monospace" font-size="9" letter-spacing="1" fill="#4a4642">${name}</text>`;
+  };
+  const tree=(x,y)=>{line([[x,y,0],[x,y,1.4]],'rgba(20,19,18,.6)',1);const [a,b]=P(x,y,2.2);out+=`<circle cx="${a}" cy="${b}" r="9" fill="#e4ded3" stroke="rgba(20,19,18,.6)" stroke-width="1"/>`;};
+  tree(13.5,1.5);tree(17,2.5);
+  box(1,7,0.8,6,4.2,'BLOCK A');
+  tree(1.5,12.5);tree(4.5,13.5);
+  box(14,19.2,6,13,3.2,'BLOCK B');
+  line([[9.9,0],[9.7,3],[10.2,6],[9.8,9.5],[10.1,14]],L,1.8,'stroke-dasharray="1 4"');
+  const cam=(x,y,tx,ty,spread,col,fill,dash)=>{
+    const dx=tx-x,dy=ty-y,Ln=Math.hypot(dx,dy),nx=-dy/Ln*spread,ny=dx/Ln*spread;
+    poly([[x,y],[tx+nx,ty+ny],[tx-nx,ty-ny]],fill,col,1,dash?'stroke-dasharray="3 3"':'');
+    const [a,b]=P(x,y);out+=`<circle cx="${a}" cy="${b}" r="4" fill="#f5f2ec" stroke="${col}" stroke-width="1.4"/><circle cx="${a}" cy="${b}" r="1.5" fill="${col}"/>`;
+  };
+  cam(11,5,8.4,1.4,1.4,'#77726b','rgba(119,114,107,.16)',false);
+  cam(10.3,13.4,9.9,9.8,1.3,'#2a2724','rgba(20,19,18,.06)',true);
+  const tag=(a,b,label,col,anchor,fill='#f5f2ec',tc='#141312')=>{
+    const w=label.length*8.6+16,x0=anchor==='end'?a-w:a;
+    out+=`<rect x="${x0}" y="${b-10}" width="${w}" height="24" fill="${fill}" stroke="${col}"/><text x="${x0+8}" y="${b+6}" font-family="Menlo,monospace" font-size="14" font-weight="600" letter-spacing=".4" fill="${tc}">${label}</text>`;
+  };
+  const pin=(x,y,col,label,lx,ly,anchor,fill,tc)=>{
+    const [a,b]=P(x,y);const top=b-30;
+    out+=`<ellipse cx="${a}" cy="${b}" rx="6" ry="3" fill="${col}" fill-opacity=".3" stroke="${col}" stroke-width="1"/><line x1="${a}" y1="${b}" x2="${a}" y2="${top}" stroke="#2a2724" stroke-width="1.2"/><circle cx="${a}" cy="${top}" r="6" fill="${col}" stroke="#f5f2ec" stroke-width="1.2"/>`;
+    tag(a+lx,top+ly,label,col,anchor,fill,tc);
+  };
+  pin(4.1,7.1,'#2a2724','STEPS',-11,0,'end');
+  pin(9.8,9.3,'#141312','BAG · OPEN',-11,0,'end','#141312','#f5f2ec');
+  {const [a,b]=P(11,5);tag(a+10,b+4,'TOO DARK','#77726b','start');}
+  svg.innerHTML=out;
+})();
+</script>
+</body>
+</html>

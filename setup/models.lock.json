@@ -1,0 +1,36 @@
+{
+  "_note": "Pins read on 2026-11-04 from the working venvs and caches on Shivraj's M1 Pro. Values ending in * are unverified. bootstrap.sh reads this file; `bash setup/bootstrap.sh models` prints it.",
+  "python": "3.12",
+  "capture": {
+    "venv": ".venv-capture",
+    "packages": ["unitree-webrtc-connect==2.2.0", "av==17.1.0", "numpy==2.5.4", "pillow==13.0.0"]
+  },
+  "twin": {
+    "venv": ".venv-twin",
+    "packages": ["torch==2.15.0", "torchvision==0.29.2", "matplotlib==3.11.2"],
+    "mapanything_repo": "https://github.com/facebookresearch/map-anything.git",
+    "mapanything_commit": "3d10cf7a3016fc0f9bb13a071ee66c47b10be0d9"
+  },
+  "dimos": {
+    "venv": ".venv-dimos",
+    "package": "dimos[base,unitree]==0.0.15"
+  },
+  "brush": {
+    "version": "v0.3.0",
+    "url": "https://github.com/ArthurBrussee/brush/releases/download/v0.3.0/",
+    "assets": {
+      "Darwin-arm64": {"file": "brush-app-aarch64-apple-darwin.tar.xz", "sha256": "65b2631398c839be3c1d4d7160fe2326389dec87830aac0710985e6690a1048c"},
+      "Linux-x86_64": {"file": "brush-app-x86_64-unknown-linux-gnu.tar.xz", "sha256": "4f0f9a8785d1951c62df26aae247c02c5bba32b00f40b06df4e1c9b867399e20"}
+    }
+  },
+  "models": [
+    {"name": "Muse Spark", "id": "muse-spark-1.3", "kind": "Meta API", "use": "frame triage, evidence Q&A", "license": "Meta API terms*", "size": "none (API)", "install": "none"},
+    {"name": "SAM 3.1", "id": "sam-3.1", "kind": "Meta API", "use": "obstacle boxes", "license": "Meta API terms*", "size": "none (API)", "install": "none"},
+    {"name": "Voice Transcribe", "id": "muse-voice-transcribe-1.0", "kind": "Meta API", "use": "spoken questions", "license": "Meta API terms*", "size": "none (API)", "install": "none"},
+    {"name": "MapAnything (Apache weights)", "id": "facebook/map-anything-apache", "revision": "00f9c245bbcb60522d1ed7f9e9d88462c6e3f38a", "kind": "local weights", "use": "images-to-3D on MPS/CUDA", "license": "Apache-2.0", "size": "4.91 GB", "install": "bootstrap.sh twin"},
+    {"name": "VGGT-1B", "id": "facebook/VGGT-1B", "revision": "860abec7937da0a4c03c41d3c269c366e82abdf9", "kind": "local weights, optional", "use": "images-to-3D, CUDA only (Linux path in docs/turbo/SETUP.md)", "license": "CC-BY-NC-4.0 (non-commercial)", "size": "5.03 GB per format", "install": "not installed by bootstrap.sh"},
+    {"name": "SAM 2.1 Hiera-L", "id": "facebook/sam2.1-hiera-large", "revision": "665f8e2ad61cf5f53d65644ff27c8ee525124610", "kind": "local weights, optional, ungated", "use": "local promptable masks", "license": "Apache-2.0", "size": "0.90 GB per format", "install": "not installed by bootstrap.sh"},
+    {"name": "SAM 3", "id": "facebook/sam3", "revision": "3c879f39826c281e95690f02c7821c4de09afae7", "kind": "local weights, optional, gated (manual approval on HF)", "use": "local open-vocabulary masks", "license": "SAM License (HF tag: other)*", "size": "3.44 GB per format", "install": "not installed by bootstrap.sh"},
+    {"name": "Brush", "id": "brush-app v0.3.0", "kind": "binary", "use": "Gaussian splat training/viewing (Metal/WebGPU)", "license": "Apache-2.0", "size": "41.4 MB macOS / 44.2 MB Linux tarball", "install": "bootstrap.sh splat"}
+  ]
+}

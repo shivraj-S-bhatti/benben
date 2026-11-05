@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BenBen Hero</title>
+<meta name="viewport" content="width=1920">
+<style>
+@font-face{font-family:"Instrument Serif";src:url("../../app/static/fonts/InstrumentSerif-Regular.ttf") format("truetype");}
+@font-face{font-family:"Inter";src:url("../../app/static/fonts/Inter-Latin.woff2") format("woff2");font-weight:100 900;}
+:root{
+  --ink:#0b1220; --teal:#14b8a6; --amber:#f59e0b; --violet:#6d5bd0; --blue:#3b82f6; --red:#ef4444; --grey:#9aa3b2;
+  --text:#f5f7fa; --text2:rgba(245,247,250,.72); --text3:rgba(245,247,250,.56);
+  --glass:rgba(255,255,255,.09); --edge:rgba(255,255,255,.22);
+  --mono:"SF Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--ink)}
+body{font-family:Inter,system-ui,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased;position:relative}
+#bg{position:absolute;inset:0;width:1920px;height:1080px}
+.page{position:absolute;inset:0;padding:44px 56px 0}
+
+.glass{background:var(--glass);border:1px solid var(--edge);border-radius:20px;
+  backdrop-filter:blur(18px) saturate(140%) brightness(.6);-webkit-backdrop-filter:blur(18px) saturate(140%) brightness(.6);
+  box-shadow:0 20px 60px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.18);}
+.mono{font-family:var(--mono);letter-spacing:.02em}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--text2)}
+
+/* header */
+header{display:flex;justify-content:space-between;align-items:flex-end;height:148px}
+h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:92px;line-height:.95;letter-spacing:-.01em;margin-top:14px}
+.sub{width:760px;font-size:21px;line-height:1.45;color:var(--text);padding-bottom:6px}
+.sub b{font-weight:600}
+
+/* zones */
+.zones>div{display:flex;flex-direction:column;min-height:0}
+.zones>div:first-child{position:relative;z-index:2}
+.card{display:flex;flex-direction:column}
+.card .tags{margin-top:auto}
+.zones{position:absolute;top:212px;left:56px;right:56px;height:556px;display:grid;grid-template-columns:380px 470px 1fr;gap:28px}
+.zlabel{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.zlabel .n{font-family:var(--mono);font-size:12px;color:var(--ink);background:var(--text);border-radius:6px;padding:2px 6px;font-weight:600}
+.zlabel .t{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--text)}
+
+.card{padding:18px}
+.photo{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:#000;border:1px solid rgba(255,255,255,.14)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.cap{font-family:var(--mono);font-size:12.5px;color:var(--text2);margin-top:9px;display:flex;justify-content:space-between}
+
+.q{font-family:"Instrument Serif",serif;font-size:42px;line-height:1.06;margin:22px 0 18px}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-size:13.5px;padding:6px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:var(--text)}
+.tag.warn{border-color:rgba(245,158,11,.6);color:#fcd38a}
+
+/* zone 2 */
+.robot{position:relative;height:400px}
+.robot img.go2{position:absolute;left:40px;top:6px;width:410px;filter:drop-shadow(0 18px 24px rgba(0,0,0,.45))}
+.robot .shadow{position:absolute;left:70px;top:318px;width:390px;height:90px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(0,0,0,.6),rgba(0,0,0,0));filter:blur(6px)}
+.robot svg.fan{position:absolute;left:-60px;top:0;width:200px;height:420px;overflow:visible}
+.stats{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:10px;margin-top:auto}
+.stat{padding:12px 14px;border-radius:14px}
+.stat .v{font-size:24px;font-weight:600;letter-spacing:-.01em}
+.stat .l{font-size:12.5px;color:var(--text2);margin-top:2px;line-height:1.3}
+.pilot{font-size:13.5px;color:var(--text2);margin-top:12px;line-height:1.45}
+
+/* zone 3 */
+.out{display:grid;grid-template-columns:360px 1fr;gap:18px;flex:1;min-height:0}
+.find{padding:16px 16px 18px;display:flex;flex-direction:column}
+.find .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.find .hd .ttl{font-size:15px;font-weight:600}
+.find .hd .ttl .num{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--teal);color:#04201c;font-size:11.5px;margin-right:8px;vertical-align:1px}
+.sam{position:absolute;border:2px solid var(--teal);border-radius:3px;box-shadow:0 0 0 1px rgba(0,0,0,.35),0 0 14px rgba(20,184,166,.55);background:rgba(20,184,166,.10)}
+.sam span{position:absolute;left:-2px;top:-24px;background:var(--teal);color:#03211d;font-family:var(--mono);font-size:11px;font-weight:600;padding:3px 6px;border-radius:4px 4px 4px 0;white-space:nowrap}
+.act{display:flex;gap:8px;align-items:center;margin:14px 0 12px}
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;padding:6px 11px;border-radius:999px}
+.chip i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.chip.flag{background:rgba(20,184,166,.18);border:1px solid rgba(20,184,166,.75);color:#7ff0e0}
+.chip.flag i{background:var(--teal)}
+.quote{font-size:19px;line-height:1.45;color:var(--text)}
+.meta{font-family:var(--mono);font-size:12px;color:var(--text2);margin-top:10px;line-height:1.6}
+.affects{margin-top:auto;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);font-size:13px;color:var(--text2);line-height:1.5}
+.affects b{color:var(--text);font-weight:500}
+.affects .tags{gap:6px}
+.affects .tag{font-size:12.5px;padding:4px 9px}
+
+.twin{padding:16px 16px 14px;display:flex;flex-direction:column}
+.twin .hd{display:flex;justify-content:space-between;align-items:baseline}
+.twin .hd .ttl{font-size:15px;font-weight:600}
+.twin svg{display:block;margin:2px auto 0}
+.rule{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:center;margin-top:auto;padding:10px;border-radius:14px;background:rgba(5,10,20,.35);border:1px solid rgba(255,255,255,.12)}
+.thumb .photo{border-radius:8px}
+.thumb .k{white-space:nowrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--text2);margin-bottom:5px}
+.thumb .k b{color:var(--text);font-weight:600}
+.verdict{display:flex;flex-direction:column;gap:6px;width:148px}
+.pill{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;font-weight:600;padding:5px 8px;border-radius:6px;text-align:center}
+.pill.grey{background:rgba(154,163,178,.2);border:1px solid rgba(154,163,178,.6);color:#e3e7ee}
+.pill.amber{background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.7);color:#fcd38a}
+.verdict .why{font-size:11.5px;color:var(--text2);line-height:1.35}
+
+/* workflow strip */
+.flow{position:absolute;left:56px;right:56px;top:800px}
+.flow .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--text2);align-items:center}
+.legend span{display:inline-flex;gap:7px;align-items:center}
+.steps{display:flex;align-items:stretch;position:relative}
+.step{flex:1 1 0;padding:11px 13px 12px;border-radius:14px;min-width:0}
+.step.wide{flex:1.75 1 0}
+.step .h{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.step .h .no{font-family:var(--mono);font-size:11px;color:var(--text3)}
+.step .t{font-size:17px;font-weight:600;letter-spacing:-.005em}
+.step .s{font-size:12.5px;color:var(--text2);margin-top:3px;line-height:1.35}
+.acts{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:5px;font-size:12px;color:var(--text)}
+.acts span{display:inline-flex;align-items:center;gap:5px}
+.acts i{width:7px;height:7px;border-radius:50%}
+.arrow{flex:0 0 22px;display:grid;place-items:center}
+.dot{width:10px;height:10px;border-radius:50%;flex:none;border:1.5px solid var(--text)}
+.dot.ran{background:var(--text)}
+.dot.wired{background:linear-gradient(90deg,var(--text) 50%,transparent 50%)}
+.dot.road{background:transparent}
+svg.loop{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
+
+footer{position:absolute;left:56px;right:56px;top:1020px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--text2)}
+footer .meta-stack{display:flex;gap:8px;align-items:center}
+footer .m{padding:5px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);color:var(--text);font-size:13.5px}
+footer .c{color:var(--text)}
+footer .gh{font-family:var(--mono);color:var(--text);font-size:13.5px}
+</style>
+</head>
+<body>
+<canvas id="bg" width="3840" height="2160"></canvas>
+<div class="page">
+
+<header>
+  <div>
+    <div class="eyebrow">BenBen · Meta hackathon · Nov 4, 2026</div>
+    <h1>BenBen keeps the map true.</h1>
+  </div>
+  <p class="sub">Routing apps are only as good as their map. A robot dog inspects the route, Meta's models judge it, and nothing is called clear until it's seen clear.</p>
+</header>
+
+<section class="zones">
+  <!-- 1 Situation -->
+  <div>
+    <div class="zlabel"><span class="n">01</span><span class="t">The question</span></div>
+    <div class="glass card" style="flex:1">
+      <div class="photo"><img src="assets/hero-frame-010.jpg" alt="BenBen's night camera frame: concrete steps with pumpkins up to a lit door, no ramp"></div>
+      <div class="cap"><span>BenBen camera · still 010</span><span>7:27:06 PM ET</span></div>
+      <p class="q">Can a wheelchair user get from home to the Uber pickup tonight?</p>
+      <div class="tags">
+        <span class="tag">Estate at night</span>
+        <span class="tag">Fall leaves</span>
+        <span class="tag warn">Step-free route unknown</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 Robot -->
+  <div>
+    <div class="zlabel"><span class="n">02</span><span class="t">The inspection</span></div>
+    <div class="robot">
+      <div class="shadow"></div>
+      <svg class="fan" viewBox="0 0 200 420">
+        <defs>
+          <linearGradient id="fanG" x1="1" x2="0" y1="0" y2="0">
+            <stop offset="0" stop-color="#3b82f6" stop-opacity=".42"/>
+            <stop offset="1" stop-color="#3b82f6" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M126 158 L-40 50 L-40 350 Z" fill="url(#fanG)"/>
+        <path d="M126 158 L-40 50 M126 158 L-40 350" stroke="#7fb0ff" stroke-opacity=".45" stroke-width="1"/>
+        <g fill="none" stroke="#9cc2ff" stroke-opacity=".5" stroke-width="1" stroke-dasharray="1.5 4" stroke-linecap="round">
+          <path d="M60 113 Q40 150 60 188"/><path d="M20 87 Q-8 150 20 240"/><path d="M-12 66 Q-46 150 -12 300"/>
+        </g>
+      </svg>
+      <img class="go2" src="assets/go2-render.png" alt="Unitree Go2 robot dog">
+    </div>
+    <div class="stats">
+      <div class="glass stat"><div class="v">4 min</div><div class="l">night run, human-driven</div></div>
+      <div class="glass stat"><div class="v">3,396</div><div class="l">video frames</div></div>
+      <div class="glass stat"><div class="v">2,355</div><div class="l">LiDAR clouds</div></div>
+    </div>
+  </div>
+
+  <!-- 3 Outcome -->
+  <div>
+    <div class="zlabel"><span class="n">03</span><span class="t">The finding, kept on the twin</span></div>
+    <div class="out">
+      <div class="glass find">
+        <div class="hd"><span class="ttl"><span class="num">3</span>Paper bag on the footpath</span><span class="mono" style="font-size:12px;color:var(--text2)">still 048</span></div>
+        <div class="photo">
+          <img src="assets/hero-frame-048.jpg" alt="Night frame: a large white paper bag on the footpath">
+          <div class="sam" style="left:15.234%;top:40.417%;width:32.656%;height:59.444%"><span>SAM 3.1 · paper bag · 0.86</span></div>
+        </div>
+        <div class="act"><span class="chip flag"><i></i>Flag for service</span><span class="mono" style="font-size:12px;color:var(--text2)">7:27:46 PM ET</span></div>
+        <p class="quote">“A large white paper bag is sitting on the path in the torch light.”</p>
+        <div class="meta">Muse Spark · muse-spark-1.3 · 20.8 s<br>SAM 3.1 box · 1.7 s</div>
+        <div class="affects"><div style="margin-bottom:8px">Muse says it affects</div><div class="tags"><span class="tag">wheelchair</span><span class="tag">crutches</span><span class="tag">cane</span><span class="tag">stroller</span><span class="tag">children</span></div></div>
+      </div>
+
+      <div class="glass twin">
+        <div class="hd"><span class="ttl">Virtual twin</span><span class="mono" style="font-size:11px;color:var(--text2)">schematic · anchors placed by hand</span></div>
+        <svg id="twin" viewBox="0 0 480 322" width="480" height="322"></svg>
+        <div class="rule">
+          <div class="thumb"><div class="k"><b>FLAGGED</b> 7:27:46</div><div class="photo"><img src="assets/hero-frame-048.jpg" alt=""></div></div>
+          <div class="thumb"><div class="k"><b>TOO DARK</b> 7:27:19</div><div class="photo"><img src="assets/hero-frame-022.jpg" alt=""></div></div>
+          <div class="verdict">
+            <span class="pill grey">NEEDS ANOTHER LOOK</span>
+            <span class="pill amber">STAYS OPEN</span>
+            <span class="why">A dark view can't close it.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="flow">
+  <div class="top">
+    <span class="eyebrow">One run, left to right</span>
+    <div class="legend">
+      <span><i class="dot ran"></i>ran Nov 4</span>
+      <span><i class="dot wired"></i>wired, tested offline</span>
+      <span><i class="dot road"></i>roadmap</span>
+    </div>
+  </div>
+  <div class="steps" id="steps">
+    <div class="glass step"><div class="h"><i class="dot road"></i><span class="no">01</span></div><div class="t">Ask</div><div class="s">a route question</div></div>
+    <div class="arrow"></div>
+    <div class="glass step" id="s-drive"><div class="h"><i class="dot ran"></i><span class="no">02</span></div><div class="t">Drive</div><div class="s">human today</div></div>
+    <div class="arrow"></div>
+    <div class="glass step"><div class="h"><i class="dot ran"></i><span class="no">03</span></div><div class="t">Sense</div><div class="s">camera · LiDAR · pose</div></div>
+    <div class="arrow"></div>
+    <div class="glass step"><div class="h"><i class="dot ran"></i><span class="no">04</span></div><div class="t">Perceive</div><div class="s">SAM 3.1 boxes</div></div>
+    <div class="arrow"></div>
+    <div class="glass step wide"><div class="h"><i class="dot ran"></i><span class="no">05</span></div><div class="t">Decide <span style="font-weight:400;color:var(--text2);font-size:13px">· Muse Spark</span></div>
+      <div class="acts"><span><i style="background:var(--amber)"></i>Reroute</span><span><i style="background:var(--teal)"></i>Flag for service</span><span><i style="background:var(--red)"></i>Report an issue</span><span><i style="background:var(--grey)"></i>Needs a human</span></div></div>
+    <div class="arrow"></div>
+    <div class="glass step"><div class="h"><i class="dot wired"></i><span class="no">06</span></div><div class="t">Review</div><div class="s">a person confirms</div></div>
+    <div class="arrow"></div>
+    <div class="glass step"><div class="h"><i class="dot wired"></i><span class="no">07</span></div><div class="t">Update twin</div><div class="s">finding + evidence</div></div>
+    <div class="arrow"></div>
+    <div class="glass step" id="s-revisit"><div class="h"><i class="dot road"></i><span class="no">08</span></div><div class="t">Revisit</div><div class="s">until verified</div></div>
+    <svg class="loop" id="loop"></svg>
+  </div>
+</section>
+
+<footer>
+  <div class="meta-stack"><span>Meta models</span><span class="m">Muse Spark</span><span class="m">SAM 3.1</span><span class="m">MapAnything</span></div>
+  <div class="c">Unitree Go2 · human-piloted Nov 4</div>
+  <div class="gh">github.com/shivraj-S-bhatti/benben</div>
+</footer>
+</div>
+
+<script>
+/* ---------- halftone background ---------- */
+(function(){
+  const c=document.getElementById('bg'),x=c.getContext('2d'),S=2;x.scale(S,S);
+  const W=1920,H=1080;
+  const blobs=[ // [cx,cy,sigma,amp,rgb]
+    [300,260,430,.95,[20,184,166]],   // teal: camera
+    [160,1000,420,.85,[59,130,246]],  // blue: LiDAR
+    [1760,940,470,.9,[109,91,208]],   // violet: twin
+    [1880,-40,380,.8,[245,158,11]],   // amber: decisions
+    [1000,1120,320,.45,[59,130,246]],
+  ];
+  // smooth colour wash underneath
+  x.fillStyle='#0b1220';x.fillRect(0,0,W,H);
+  for(const [cx,cy,s,a,[r,g,b]] of blobs){
+    const gr=x.createRadialGradient(cx,cy,0,cx,cy,s*1.6);
+    gr.addColorStop(0,`rgba(${r},${g},${b},${.42*a})`);gr.addColorStop(1,`rgba(${r},${g},${b},0)`);
+    x.fillStyle=gr;x.fillRect(0,0,W,H);
+  }
+  // halftone dots: size follows intensity, 45-degree screen
+  const P=7.5;
+  for(let j=0,y=0;y<H+P;j++,y+=P*.866){
+    for(let xx=(j%2)*P/2;xx<W+P;xx+=P){
+      let I=0,R=0,G=0,B=0;
+      for(const [cx,cy,s,a,col] of blobs){
+        const d2=(xx-cx)**2+(y-cy)**2,w=a*Math.exp(-d2/(2*s*s));
+        I+=w;R+=w*col[0];G+=w*col[1];B+=w*col[2];
+      }
+      if(I<.04)continue;
+      R/=I;G/=I;B/=I;
+      // calm centre for the text
+      const cd=((xx-980)/700)**2+((y-470)/360)**2;I*=1-.75*Math.exp(-cd);
+      I=Math.min(1,I);
+      const rad=P*.5*Math.sqrt(I)*.92;
+      if(rad<.45)continue;
+      x.fillStyle=`rgba(${R+(255-R)*.25|0},${G+(255-G)*.25|0},${B+(255-B)*.25|0},${.25+.45*I})`;
+      x.beginPath();x.arc(xx,y,rad,0,7);x.fill();
+    }
+  }
+  // vignette
+  const v=x.createRadialGradient(W/2,H/2,H*.4,W/2,H/2,H*1.1);
+  v.addColorStop(0,'rgba(5,8,16,0)');v.addColorStop(1,'rgba(5,8,16,.55)');x.fillStyle=v;x.fillRect(0,0,W,H);
+})();
+
+/* ---------- workflow arrows + return arc ---------- */
+(function(){
+  for(const a of document.querySelectorAll('.arrow'))
+    a.innerHTML='<svg width="22" height="12" viewBox="0 0 22 12"><path d="M2 6H18M14 2L18 6L14 10" fill="none" stroke="rgba(245,247,250,.6)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const box=document.getElementById('steps').getBoundingClientRect();
+  const d=document.getElementById('s-drive').getBoundingClientRect(), r=document.getElementById('s-revisit').getBoundingClientRect();
+  const x1=r.left+r.width/2-box.left, x0=d.left+d.width/2-box.left, y=box.height, dy=34, mid=(x0+x1)/2;
+  const s=document.getElementById('loop');s.setAttribute('width',box.width);s.setAttribute('height',box.height+60);
+  s.innerHTML=`<path d="M${x1} ${y+2} V${y+dy-10} Q${x1} ${y+dy} ${x1-10} ${y+dy} H${x0+10} Q${x0} ${y+dy} ${x0} ${y+dy-10} V${y+8}" fill="none" stroke="#f59e0b" stroke-opacity=".85" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <path d="M${x0-5} ${y+12} L${x0} ${y+5} L${x0+5} ${y+12}" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="${mid-112}" y="${y+dy-13}" width="224" height="26" rx="13" fill="#141a2a" stroke="#f59e0b" stroke-opacity=".7"/>
+  <text x="${mid}" y="${y+dy+4.5}" text-anchor="middle" font-family="SF Mono,Menlo,monospace" font-size="12.5" letter-spacing=".5" fill="#fcd38a">revisit until verified</text>`;
+})();
+
+/* ---------- isometric twin schematic ---------- */
+(function(){
+  const svg=document.getElementById('twin'),NS='http://www.w3.org/2000/svg';
+  const k=15,ox=208,oy=56;
+  const P=(x,y,z=0)=>[ox+(x-y)*k*.866, oy+(x+y)*k*.5-z*k];
+  const pts=a=>a.map(p=>P(...p).map(v=>v.toFixed(1)).join(',')).join(' ');
+  let out='';
+  const LINE='rgba(190,225,255,.85)';
+  const poly=(a,fill,stroke=LINE,w=1.1,extra='')=>out+=`<polygon points="${pts(a)}" fill="${fill}" stroke="${stroke}" stroke-width="${w}" stroke-linejoin="round" ${extra}/>`;
+  const line=(a,stroke=LINE,w=1.1,extra='')=>out+=`<polyline points="${pts(a)}" fill="none" stroke="${stroke}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" ${extra}/>`;
+  out+=`<defs><filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)">`;
+  // ground plate + dot grid
+  poly([[0,0],[20,0],[20,14],[0,14]],'rgba(120,170,255,.07)','rgba(190,225,255,.35)',1);
+  for(let i=1;i<20;i+=1)for(let j=1;j<14;j+=1){const [a,b]=P(i,j);out+=`<circle cx="${a}" cy="${b}" r=".7" fill="rgba(190,225,255,.25)"/>`;}
+  // walkway along y
+  poly([[8.2,0],[11.6,0],[11.6,14],[8.2,14]],'rgba(255,255,255,.07)','rgba(190,225,255,.55)',1);
+  // stub path + steps to block A
+  poly([[3,6],[5.2,6],[5.2,8.2],[3,8.2]],'rgba(255,255,255,.05)','rgba(190,225,255,.45)',1);
+  poly([[5.2,7],[8.2,7],[8.2,8.2],[5.2,8.2]],'rgba(255,255,255,.05)','rgba(190,225,255,.45)',1);
+  for(let i=0;i<3;i++)line([[3,6+i*.55,.35*(3-i)],[5.2,6+i*.55,.35*(3-i)]],'rgba(245,158,11,.9)',1.2);
+  // railing along walkway edge
+  line([[8.2,1],[8.2,5]],'rgba(190,225,255,.7)',1);line([[8.2,1,1],[8.2,5,1]],'rgba(190,225,255,.85)',1.1);
+  for(let y=1;y<=5;y+=.8)line([[8.2,y,0],[8.2,y,1]],'rgba(190,225,255,.55)',.8);
+  // boxes
+  const box=(x0,x1,y0,y1,h,name)=>{
+    poly([[x1,y0,0],[x1,y1,0],[x1,y1,h],[x1,y0,h]],'rgba(109,91,208,.14)');
+    poly([[x0,y1,0],[x1,y1,0],[x1,y1,h],[x0,y1,h]],'rgba(109,91,208,.22)');
+    poly([[x0,y0,h],[x1,y0,h],[x1,y1,h],[x0,y1,h]],'rgba(255,255,255,.10)');
+    for(let z=1;z<h-.6;z+=1.2)for(let x=x0+.7;x<x1-.6;x+=1.3)line([[x,y1,z],[x+.6,y1,z],[x+.6,y1,z+.6],[x,y1,z+.6],[x,y1,z]],'rgba(190,225,255,.4)',.7);
+    for(let z=1;z<h-.6;z+=1.2)for(let y=y0+.7;y<y1-.6;y+=1.3)line([[x1,y,z],[x1,y+.6,z],[x1,y+.6,z+.6],[x1,y,z+.6],[x1,y,z]],'rgba(190,225,255,.3)',.7);
+    const [a,b]=P((x0+x1)/2,(y0+y1)/2,h);
+    out+=`<text x="${a}" y="${b+3}" text-anchor="middle" font-family="SF Mono,Menlo,monospace" font-size="9" letter-spacing="1" fill="rgba(230,240,255,.8)">${name}</text>`;
+  };
+  // trees (behind first)
+  const tree=(x,y)=>{line([[x,y,0],[x,y,1.4]],'rgba(190,225,255,.6)',1);const [a,b]=P(x,y,2.2);out+=`<circle cx="${a}" cy="${b}" r="9" fill="rgba(20,184,166,.12)" stroke="rgba(120,230,210,.75)" stroke-width="1"/>`;};
+  tree(13.5,1.5);tree(17,2.5);
+  box(1,7,0.8,6,4.2,'BLOCK A');
+  tree(1.5,12.5);tree(4.5,13.5);
+  // bench
+  poly([[12.3,9],[13,9],[13,10.8],[12.3,10.8]].map(p=>[...p,.5]),'rgba(255,255,255,.12)','rgba(190,225,255,.8)',1);
+  line([[12.3,9,0],[12.3,9,.5]]);line([[12.3,10.8,0],[12.3,10.8,.5]]);line([[13,10.8,0],[13,10.8,.5]]);
+  box(14,19.2,6,13,3.2,'BLOCK B');
+  // driven path
+  line([[9.9,0],[9.7,3],[10.2,6],[9.8,9.5],[10.1,14]],'rgba(45,212,191,.95)',1.6,'stroke-dasharray="1 4"');
+  // camera viewpoints with cones
+  const cam=(x,y,tx,ty,spread,col,fill,dash)=>{
+    const dx=tx-x,dy=ty-y,L=Math.hypot(dx,dy),nx=-dy/L*spread,ny=dx/L*spread;
+    poly([[x,y],[tx+nx,ty+ny],[tx-nx,ty-ny]],fill,col,1,dash?'stroke-dasharray="3 3"':'');
+    const [a,b]=P(x,y);out+=`<circle cx="${a}" cy="${b}" r="4" fill="#0b1220" stroke="${col}" stroke-width="1.4"/><circle cx="${a}" cy="${b}" r="1.5" fill="${col}"/>`;
+  };
+  cam(11,5,8.4,1.4,1.4,'rgba(180,188,200,.9)','rgba(154,163,178,.16)',false);  // dark look at railing
+  cam(10.3,13.4,9.9,9.8,1.3,'rgba(245,158,11,.95)','rgba(245,158,11,.12)',true);   // fresh view needed
+  out+='</g>';
+  // issue pins + labels (no glow so text stays crisp)
+  const pin=(x,y,col,label,lx,ly,anchor='start')=>{
+    const [a,b]=P(x,y);const top=b-30;
+    out+=`<ellipse cx="${a}" cy="${b}" rx="6" ry="3" fill="${col}" fill-opacity=".3" stroke="${col}" stroke-width="1"/><line x1="${a}" y1="${b}" x2="${a}" y2="${top}" stroke="rgba(245,247,250,.8)" stroke-width="1.2"/><circle cx="${a}" cy="${top}" r="5.5" fill="${col}" stroke="#fff" stroke-opacity=".7" stroke-width="1"/>`;
+    tag(a+lx,top+ly,label,col,anchor);
+  };
+  const tag=(a,b,label,col,anchor)=>{
+    const w=label.length*6.6+14,x0=anchor==='end'?a-w:a;
+    out+=`<rect x="${x0}" y="${b-9}" width="${w}" height="18" rx="4" fill="rgba(8,13,26,.82)" stroke="${col}" stroke-opacity=".8"/><text x="${x0+7}" y="${b+3.5}" font-family="SF Mono,Menlo,monospace" font-size="10.5" letter-spacing=".4" fill="#f5f7fa">${label}</text>`;
+  };
+  pin(4.1,7.1,'#f59e0b','STEPS · 7:27 PM',-10,0,'end');
+  pin(9.8,9.3,'#14b8a6','BAG · 7:27 PM',-10,0,'end');
+  {const [a,b]=P(11,5);tag(a+10,b+4,'7:27 PM · TOO DARK','rgba(180,188,200,.9)','start');}
+  {const [a,b]=P(10.3,13.4);tag(a-10,b+6,'FRESH VIEW NEEDED','#f59e0b','end');}
+  svg.innerHTML=out;
+})();
+</script>
+</body>
+</html>

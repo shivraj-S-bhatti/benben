@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BenBen: how it behaves</title>
+<style>
+@font-face { font-family: "Inter"; src: url("../../app/static/fonts/Inter-Latin.woff2") format("woff2"); font-weight: 100 900; }
+@page { size: 1240px 1754px; margin: 0; }
+:root {
+  --ink: #141312; --ink2: #1e1c1a; --ink3: #2a2724;
+  --g1: #4a4642; --g2: #5f5a54; --g3: #77726b; --g4: #a39d94;
+  --paper: #e9e4db; --card: #f5f2ec; --card2: #efebe4; --shade: #ddd6ca;
+  --red: #c7372a; --red-d: #8f2a20; --red-m: #e0786b; --khaki: #b3a37f;
+  --hair: rgba(20,19,18,.16);
+  --disp: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --mono: "SF Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1240px; height: 1754px; background: var(--paper); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: "Inter", sans-serif; color: var(--ink); font-size: 15px; line-height: 1.45; }
+.page { position: relative; width: 1240px; height: 1754px; overflow: hidden; padding: 48px 60px 0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .08 0 0 0 0 .07 0 0 0 0 .06 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(rgba(20,19,18,.045) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgba(20,19,18,.045) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--paper); }
+.mono { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.disp { font-family: var(--disp); font-weight: 700; letter-spacing: -.02em; }
+.card { background: var(--card); border: 1px solid var(--hair); border-radius: 2px; }
+.sw { display: inline-block; width: 10px; height: 10px; flex: none; }
+.a-report { background: var(--red); } .a-reroute { background: var(--ink); } .a-flag { background: var(--khaki); }
+.a-human { background: transparent; border: 1.5px solid var(--g3); }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 7px; border: 1px solid var(--ink); background: var(--card); color: var(--ink);
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+
+/* masthead */
+.mast { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+.mast .wm { font-family: var(--disp); font-weight: 700; font-size: 24px; letter-spacing: -.02em; margin-right: 16px; }
+.mast .mono { color: var(--g1); }
+
+/* hero */
+.hero { position: relative; display: grid; grid-template-columns: 1fr 330px; padding-bottom: 26px; }
+.hero h1 { font-size: 66px; line-height: .98; margin-top: 34px; width: 780px; }
+.hero .dek { width: 620px; margin-top: 18px; font-size: 18px; line-height: 1.45; color: var(--g1); }
+.hero .dek b { color: var(--ink); font-weight: 600; }
+.hero .art { position: relative; }
+.hero .ht { position: absolute; left: 0; top: 14px; width: 330px; height: 230px; background: url("assets/op2-halftone.png") 0 0 / 100% 100% no-repeat; opacity: .8; }
+.hero img { position: absolute; right: 40px; top: 0; width: 206px;
+  filter: sepia(.35) saturate(.85) contrast(1.06) brightness(.95) drop-shadow(0 18px 18px rgba(42,39,36,.28)); }
+.hero .cap { position: absolute; right: 0; bottom: 0; color: var(--g2); font-size: 10px; }
+
+/* problem band */
+.problem { display: grid; grid-template-columns: 1.6fr 1fr 1fr; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.problem > div { padding: 18px 26px 18px 0; }
+.problem > div + div { border-left: 1px solid var(--hair); padding-left: 26px; }
+.problem q { display: block; font-family: var(--disp); font-weight: 500; font-size: 23px; line-height: 1.2; letter-spacing: -.01em; quotes: "\201C" "\201D"; }
+.problem .who { margin-top: 10px; color: var(--g2); }
+.problem .k { color: var(--g2); margin-bottom: 8px; }
+.problem .v { font-size: 18px; line-height: 1.3; font-weight: 500; }
+
+/* section heads */
+.sh { display: flex; align-items: center; gap: 12px; margin: 26px 0 12px; color: var(--g1); }
+.sh b { color: var(--ink); font-weight: 600; }
+.sh::after { content: ""; flex: 1; height: 1px; background: var(--hair); }
+
+/* behaviours */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.bh { display: flex; flex-direction: column; padding: 12px 12px 16px; }
+.ph { position: relative; height: 252px; overflow: hidden; background: var(--ink2); }
+.ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph .cap { position: absolute; right: 0; bottom: 0; padding: 3px 7px; background: rgba(20,19,18,.72); color: #e9e4db; font-size: 9.5px; }
+.ph.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--card); }
+.ph.pair > div { position: relative; overflow: hidden; background: var(--ink2); }
+.ph.pair .chip { position: absolute; left: 6px; bottom: 6px; font-size: 9.5px; padding: 2px 6px; }
+.ph.paper { background: var(--card2); }
+.ph.paper img { object-fit: cover; transform: scale(1.12); }
+.ph.gray img { filter: grayscale(1) contrast(1.05); }
+.fit { position: absolute; top: 0; height: 100%; aspect-ratio: 16 / 9; left: 50%; transform: translateX(-50%); }
+.sam { position: absolute; border: 2px solid var(--red); }
+.sam span { position: absolute; left: -2px; top: -20px; padding: 2px 6px; background: var(--red); color: #fff; font-size: 9.5px; white-space: nowrap; }
+.sk { margin-top: 8px; height: 164px; background: var(--card2); border: 1px solid rgba(20,19,18,.12); display: grid; place-items: center; }
+.sk.tall { height: 424px; margin-top: 0; }
+.sk svg { display: block; overflow: visible; }
+.bh .head { display: flex; align-items: baseline; gap: 10px; margin: 14px 2px 6px; }
+.bh .head .mono { color: var(--g2); }
+.bh h3 { font-size: 25px; line-height: 1; }
+.bh p { margin: 0 2px; font-size: 15px; text-wrap: pretty; color: var(--g1); line-height: 1.4; }
+.bh p b { color: var(--ink); font-weight: 600; }
+
+/* footer */
+.foot { position: absolute; left: 60px; right: 60px; bottom: 32px; display: flex; justify-content: space-between; align-items: center;
+  font-size: 12.5px; color: var(--g1); border-top: 1px solid var(--ink); padding-top: 12px; }
+.foot b { color: var(--ink); font-weight: 600; }
+.foot .st { display: flex; gap: 14px; align-items: center; }
+.foot .st span { display: inline-flex; align-items: center; gap: 6px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="mast">
+    <div><span class="wm">BenBen</span><span class="mono">How it behaves</span></div>
+    <span class="mono">Community accessibility · route inspection</span>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1 class="disp" data-w>A robot dog that checks if the route is passable.</h1>
+      <p class="dek" data-w>Six behaviours of <b>the architecture we’re building</b>.</p>
+    </div>
+    <div class="art">
+      <div class="ht"></div>
+      <img src="assets/go2-render.png" alt="Unitree Go2 robot dog">
+      <span class="cap mono">Unitree Go2 · official model render</span>
+    </div>
+  </section>
+
+  <section class="problem">
+    <div>
+      <q data-w>I got injured and ended up in a wheelchair … I had no idea if my route to the bus was even passable.</q>
+      <div class="who mono">Shivraj, who built BenBen</div>
+    </div>
+    <div><div class="k mono">Today, owners</div><div class="v" data-w>learn about barriers from whoever couldn’t pass.</div></div>
+    <div><div class="k mono">Today, routing apps</div><div class="v" data-w>run on map data that can be years old.</div></div>
+  </section>
+
+  <div class="sh mono"><b>01</b>How it behaves</div>
+  <section class="grid">
+
+    <!-- 1 notices change -->
+    <div class="bh card">
+      <div class="ph paper gray"><img src="assets/m-lidar-iso.jpg" alt="LiDAR voxel map of a route"><span class="cap mono">LiDAR map</span></div>
+      <div class="sk">
+        <svg width="320" height="90" viewBox="0 0 300 84" fill="none" stroke="#2a2724" stroke-width="1.6" font-family="Menlo,monospace" font-size="10">
+          <path d="M8 58 H170" stroke="#a39d94" stroke-dasharray="4 4"/>
+          <path d="M8 58 H78 L86 32 H116 L124 58 H170"/>
+          <path d="M101 56 V36 M97 40 L101 34 L105 40 M97 52 L101 58 L105 52" stroke-width="1.2" stroke="#c7372a"/>
+          <path d="M184 46 H214 M208 40 L215 46 L208 52"/>
+          <path d="M228 46 Q258 20 288 46 Q258 72 228 46 Z" fill="#f5f2ec"/>
+          <circle cx="258" cy="46" r="9" fill="#2a2724" stroke="none"/>
+          <g fill="#4a4642" stroke="none"><text x="8" y="80">GROUND HEIGHT</text><text x="88" y="22" fill="#c7372a">CHANGED</text><text x="244" y="80">LOOK</text></g>
+        </svg>
+      </div>
+      <div class="head"><span class="mono">01</span><h3 class="disp">Notices change</h3></div>
+      <p data-w>Geometry decides when to look. Vision decides what it is.</p>
+    </div>
+
+    <!-- 2 judges with evidence -->
+    <div class="bh card">
+      <div class="ph"><div class="fit"><img src="assets/m-frame-048.jpg" alt="Paper bag on a footpath at night">
+        <div class="sam" style="left:15.2%;top:40.4%;width:32.7%;height:59.4%"><span class="mono">SAM 3.1 · paper bag</span></div></div>
+        <span class="cap mono">Real frame</span></div>
+      <div class="sk">
+        <svg width="320" height="94" viewBox="0 0 300 88" fill="none" stroke="#2a2724" stroke-width="1.6" font-family="Menlo,monospace" font-size="10">
+          <rect x="8" y="6" width="100" height="64" fill="#f5f2ec"/>
+          <rect x="24" y="22" width="38" height="44" stroke="#c7372a" stroke-dasharray="4 3"/>
+          <path d="M118 40 H146 M140 34 L147 40 L140 46"/>
+          <rect x="160" y="6" width="11" height="11" fill="#c7372a" stroke="none"/>
+          <rect x="160" y="26" width="11" height="11" fill="#2a2724" stroke="none"/>
+          <rect x="155" y="41" width="140" height="21" stroke-width="1.4"/>
+          <rect x="160" y="46" width="11" height="11" fill="#b3a37f" stroke="none"/>
+          <rect x="160.8" y="66.8" width="9.4" height="9.4" stroke="#77726b" stroke-width="1.5"/>
+          <g fill="#4a4642" stroke="none"><text x="178" y="15">REPORT</text><text x="178" y="35">REROUTE</text><text x="178" y="55" fill="#141312">FLAG ✓</text><text x="178" y="75">NEEDS A HUMAN</text><text x="8" y="84">CITED FRAME + BOX</text></g>
+        </svg>
+      </div>
+      <div class="head"><span class="mono">02</span><h3 class="disp">Judges with evidence</h3></div>
+      <p data-w>One action, an outlined object and a cited frame.</p>
+    </div>
+
+    <!-- 3 won't clear in the dark -->
+    <div class="bh card">
+      <div class="ph pair">
+        <div><img src="assets/op-frame-022.jpg" alt="Dark frame of a railing"><span class="chip"><i class="sw a-human"></i>Too dark</span></div>
+        <div><img src="assets/hero-frame-010.jpg" alt="Lit frame of steps to a door" style="object-position:60% 50%"><span class="chip">✓ Usable</span></div>
+      </div>
+      <div class="sk">
+        <svg width="320" height="94" viewBox="0 0 300 88" fill="none" stroke="#2a2724" stroke-width="1.6" font-family="Menlo,monospace" font-size="10">
+          <defs><pattern id="hd" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V5" stroke="#a39d94" stroke-width="2"/></pattern></defs>
+          <rect x="8" y="22" width="48" height="40" fill="#f5f2ec"/><rect x="24" y="34" width="16" height="16" fill="#2a2724" stroke="none"/>
+          <rect x="72" y="22" width="48" height="40" fill="url(#hd)"/>
+          <rect x="136" y="22" width="48" height="40" fill="url(#hd)"/>
+          <path d="M88 36 L104 48 M104 36 L88 48 M152 36 L168 48 M168 36 L152 48" stroke-width="1.4"/>
+          <path d="M190 42 H214 M208 36 L215 42 L208 48"/>
+          <rect x="226" y="18" width="66" height="48" stroke-width="2.2" fill="#f5f2ec"/><rect x="251" y="34" width="16" height="16" fill="#2a2724" stroke="none"/>
+          <path d="M32 18 C32 2 259 2 259 14" stroke-dasharray="3 3" stroke-width="1.2"/><path d="M254 9 L259 16 L264 9" stroke-width="1.2"/>
+          <g fill="#4a4642" stroke="none"><text x="14" y="80">LIT</text><text x="78" y="80">DARK</text><text x="142" y="80">DARK</text><text x="236" y="80" fill="#141312">STATE</text></g>
+        </svg>
+      </div>
+      <div class="head"><span class="mono">03</span><h3 class="disp">Won’t clear in the dark</h3></div>
+      <p data-w>The latest <b>usable</b> view wins.</p>
+    </div>
+
+    <!-- 4 asks one question -->
+    <div class="bh card">
+      <div class="ph"><img src="assets/td-frame-047.jpg" alt="Paper bag at the edge of a footpath" style="object-position:30% 70%"><span class="cap mono">Real frame</span></div>
+      <div class="sk">
+        <svg width="320" height="94" viewBox="0 0 300 88" fill="none" stroke="#2a2724" stroke-width="1.6" font-family="Menlo,monospace" font-size="10.5">
+          <path d="M8 8 H170 V50 H40 L28 62 V50 H8 Z" fill="#f5f2ec"/>
+          <g fill="#141312" stroke="none"><text x="18" y="26">ON THE PATH</text><text x="18" y="41">OR BESIDE IT?</text></g>
+          <rect x="190" y="10" width="96" height="26" rx="13" fill="#f5f2ec"/>
+          <rect x="190" y="46" width="96" height="26" rx="13" fill="#2a2724"/>
+          <g stroke="none" text-anchor="middle"><text x="238" y="27" fill="#2a2724">ON PATH</text><text x="238" y="63" fill="#f5f2ec">BESIDE</text></g>
+          <circle cx="272" cy="66" r="13" stroke-width="1.2" stroke-dasharray="2 3"/>
+          <g fill="#4a4642" stroke="none"><text x="190" y="88">ONE TAP</text></g>
+        </svg>
+      </div>
+      <div class="head"><span class="mono">04</span><h3 class="disp">Asks one question</h3></div>
+      <p data-w>When unsure, one question a person answers with a tap.</p>
+    </div>
+
+    <!-- 5 goes back to look -->
+    <div class="bh card">
+      <div class="sk tall">
+        <svg width="336" height="258" viewBox="0 0 300 230" fill="none" stroke="#2a2724" stroke-width="1.6" font-family="Menlo,monospace" font-size="10.5">
+          <path d="M150 34 C 80 34 40 60 40 96 M150 34 C 220 34 260 60 260 96" stroke-dasharray="4 4"/>
+          <path d="M34 90 L40 98 L46 90 M254 90 L260 98 L266 90"/>
+          <g fill="#4a4642" stroke="none" text-anchor="middle"><text x="150" y="22">REVISIT</text></g>
+          <rect x="12" y="108" width="56" height="52" fill="#f5f2ec"/><path d="M24 148 L56 120"/>
+          <rect x="122" y="108" width="56" height="52" fill="#f5f2ec"/><rect x="138" y="122" width="24" height="24" fill="#c7372a" stroke="none"/>
+          <rect x="232" y="108" width="56" height="52" fill="#f5f2ec"/><path d="M244 148 L276 120"/><path d="M252 134 L258 140 L268 128" stroke-width="2.2"/>
+          <path d="M72 134 H116 M110 128 L117 134 L110 140 M182 134 H226 M220 128 L227 134 L220 140"/>
+          <g fill="#4a4642" stroke="none" text-anchor="middle"><text x="40" y="180">CLEAR</text><text x="150" y="180" fill="#8f2a20">BLOCKED</text><text x="260" y="180">CLEARED</text></g>
+        </svg>
+      </div>
+      <div class="head"><span class="mono">05</span><h3 class="disp">Goes back to look</h3></div>
+      <p data-w>An issue stays open until a fresh view clears it.</p>
+    </div>
+
+    <!-- 6 plans its next look -->
+    <div class="bh card">
+      <div class="ph paper"><img src="assets/op2-map.png" alt="Top-down LiDAR map with a route"><span class="cap mono">LiDAR map</span></div>
+      <div class="sk">
+        <svg width="320" height="94" viewBox="0 0 300 88" fill="none" stroke="#2a2724" stroke-width="1.6" font-family="Menlo,monospace" font-size="10">
+          <path d="M14 70 L76 34 L146 62 L214 22 L284 52" stroke-dasharray="4 4" stroke="#77726b"/>
+          <circle cx="14" cy="70" r="5" fill="#2a2724"/>
+          <g fill="#f5f2ec"><circle cx="76" cy="34" r="10"/><circle cx="146" cy="62" r="10"/><circle cx="284" cy="52" r="8"/></g>
+          <g fill="#2a2724" stroke="none" text-anchor="middle"><text x="76" y="38">1</text><text x="146" y="66">2</text><text x="284" y="56">4</text></g>
+          <circle cx="214" cy="22" r="10" fill="#c7372a" stroke="#c7372a"/><text x="214" y="26" fill="#fff" stroke="none" text-anchor="middle">3</text>
+          <path d="M20 64 Q90 -14 201 18" stroke-width="2"/><path d="M192 13 L202 19 L194 26" stroke-width="2"/>
+          <circle cx="166" cy="76" r="7" fill="#f5f2ec" stroke-width="1.2"/><path d="M166 72 V76 H169" stroke-width="1.2"/>
+          <g fill="#4a4642" stroke="none"><text x="178" y="80">STALE</text><text x="228" y="16" fill="#8f2a20">OPEN</text><text x="70" y="8" fill="#141312">NEXT</text></g>
+        </svg>
+      </div>
+      <div class="head"><span class="mono">06</span><h3 class="disp">Plans its next look</h3></div>
+      <p data-w>A reasoner picks the next stop from open issues and stale checkpoints.</p>
+    </div>
+
+  </section>
+
+  <footer class="foot">
+    <div><b>Meta models</b> Muse Spark · SAM 3.1 · MapAnything · Voice Transcribe &nbsp;·&nbsp; <span class="mono" style="text-transform:none;letter-spacing:0">github.com/shivraj-S-bhatti/benben</span></div>
+    <div class="st">
+      <span><i class="sw a-report"></i>Report</span>
+      <span><i class="sw a-reroute"></i>Reroute</span>
+      <span><i class="sw a-flag"></i>Flag</span>
+      <span><i class="sw a-human"></i>Needs a human</span>
+    </div>
+  </footer>
+</div>
+</body>
+</html>

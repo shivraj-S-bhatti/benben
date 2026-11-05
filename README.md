@@ -2,6 +2,8 @@
 
 BenBen is a Unitree Go2 robot dog that walks a residential estate's routes and checks them for access barriers. A person drives it with the handheld remote. A Mac records its camera, LiDAR and pose over a listen-only link. Meta's Muse Spark reads each frame and picks one action: **reroute**, **flag for service**, **report an issue** or **needs a human**. SAM 3.1 outlines the obstacle, and the dashboard keeps every finding with its photo and capture time.
 
+![BenBen's loop: one run left to right, memory and learning right to left. Dots mark what's built, wired or next.](docs/turbo/assets/benben-loop-v2.png)
+
 ## Why
 
 Shivraj, from the demo script:
